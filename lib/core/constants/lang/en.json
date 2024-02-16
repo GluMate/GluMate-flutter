@@ -1,0 +1,45 @@
+{
+    "On_boarding_title": "Keep your sugar on track",
+    "On_boarding_desc": "We offer the best remote monitoring experience for both diabetes and car providers ",
+    "Get_started": "Get started",
+    "already_memeber": "already a member ? login instead",
+    "sign_up_with_email": "Sign up with Email",
+    "server_error": "Server Error , try again later",
+    "network error": "No Internet connexion , Please verify your Internet connexion",
+    "email_exist_error": "it seems that you already have an account ",
+    "app_error": "Error occured , try again" ,
+   "first_name": "First name" ,
+   "first_name_empty" : "Please Enter your name" ,
+   "first_name_error" : "First Name must be at least 3 characters",
+   "last_name" : "Last name" ,
+   "last_name_empty" : "Please Enter your last name" ,
+   "last_name_error" : "Last Name must be at least 3 characters",
+   "email" : "Email" ,
+   "email_empty" : "Please Enter your email" ,
+   "email_error" : "Invalid email",
+   "password": "Password" ,
+   "password_empty" : "Please Enter your password" ,
+   "password_error" : "Password should be at least 6 characters" ,
+   "confirm_password" : "Confirm password",
+   "confirm_password_error" : "Unmatching passwords",
+   "confirm_password_empty" : "Please confirm your password" ,
+   "male" : "Male" ,
+   "female" : "Female" ,
+   "care_provider" : "Care provider" ,
+   "patient" : "Patient" ,
+   "select_DOB" : "Select your Date of Birth" ,
+   "select_gender" : "Select your gender " ,
+   "select_role" : "Who are you ?" ,
+   "next" : "Next" ,
+   "previous" : "previous" ,
+   "create_account" : "Create account" ,
+   "sign_in" : "Sign In" ,
+   "join_patients" : "Join our patients !" ,
+   "welcome_back" : "Welcome back !",
+   "language" : "language" 
+
+
+
+   
+    
+  }
