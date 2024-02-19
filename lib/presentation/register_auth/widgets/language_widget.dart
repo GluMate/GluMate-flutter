@@ -15,14 +15,19 @@ class LanguageView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: Language.languageList().map((language) {
           return ListTile(
+            leading: Image.asset(
+              language.flagImagePath,
+              width: 30, 
+              height: 30, 
+            ),
             title: Text(
               language.name,
               style: TextStyle(fontSize: 20),
             ),
             onTap: () async {
               final newLocale = Locale(language.languageCode);
-              onLocaleChanged(newLocale); 
-              Navigator.pop(context); 
+              onLocaleChanged(newLocale);
+              Navigator.pop(context);
             },
           );
         }).toList(),

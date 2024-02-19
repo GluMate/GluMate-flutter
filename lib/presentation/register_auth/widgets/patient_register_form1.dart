@@ -8,7 +8,7 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_wid
 
 class registerForm1 extends StatefulWidget {
 
-   final TextEditingController controllerName;
+  final TextEditingController controllerName;
   final TextEditingController controllerLastName;
    int selectedGender = 1 ;
    final VoidCallback? onNextPressed ;
@@ -143,10 +143,10 @@ Widget build(BuildContext context){
             
           ),
           const SizedBox(height: 20,),
-Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               CustomGenderButton("assets/male.jpg", 1 , AppLocalization.of(context).translate('male')!),
+               CustomGenderButton("assets/male1.jpg", 1 , AppLocalization.of(context).translate('male')!),
                
                 const SizedBox(
                   width:20,
@@ -195,7 +195,7 @@ Widget CustomStyledButton(Function onPressed, String buttonText) {
     child: ElevatedButton(
       onPressed: onPressed as void Function()?,
       style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 76, 139, 175),
+        primary: Color.fromARGB(255, 118, 183, 221),
         onPrimary: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),

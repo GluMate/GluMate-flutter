@@ -6,21 +6,27 @@ import 'package:provider/provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_widget.dart';
 
-class DoctorregisterForm1 extends StatefulWidget {
+class registerDoctorForm1 extends StatefulWidget {
 
    final TextEditingController controllerName;
    final TextEditingController controllerLastName;
-   int selectedGender = 1 ;
-   final VoidCallback? onNextPressed ;
-   DateTime selectedDate = DateTime.now();
+   final TextEditingController controllerHours;
+   final TextEditingController controllerSpecialization;
+   final TextEditingController controllerEmail;
 
-  DoctorregisterForm1({
+
+   final VoidCallback? onNextPressed ;
+
+  registerDoctorForm1({
     Key? key,
     required this.controllerName,
     required this.controllerLastName,
-    required this.selectedGender,
-    required this.selectedDate,
+    required this.controllerHours,
+    required this.controllerSpecialization,
+    required this.controllerEmail,
+
     this.onNextPressed
+   
   }) : super(key: key);
 
   @override
@@ -30,67 +36,11 @@ class DoctorregisterForm1 extends StatefulWidget {
 }
 
 
-class _registerForm1State extends State<DoctorregisterForm1> {
-
-   int selectedGender = 1 ;
-   DateTime _selectedDate = DateTime.now();
+class _registerForm1State extends State<registerDoctorForm1> {
+ RegExp get _emailRegex =>
+      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+   
     final _formKey = GlobalKey<FormState>();
-
-
-  Widget CustomGenderButton(String assetName, int index , String buttonText) {
-   return OutlinedButton(
-      onPressed: () {
-        setState(() {
-          selectedGender = index;
-        });
-      },
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        side: BorderSide(
-            width: (selectedGender == index) ? 2.0 : 0.5,
-            color: (selectedGender == index)
-                ? Colors.green
-                : Colors.blue.shade600),
-      ),
-      child: Stack(
-         children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                assetName,
-                fit: BoxFit.contain,
-                width: 100,
-                height: 100,
-              ),
-              SizedBox(height: 5),
-              Text(
-                buttonText,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-        if (selectedGender == index)
-          Positioned(
-            top: 5,
-            right: 5,
-            child: Image.asset(
-              "assets/tick-circle.png",
-              width: 25,
-              fit: BoxFit.cover,
-            ),
-          ),
-      ],
-      ),
-    );
-  }
 
 @override
 Widget build(BuildContext context){
@@ -109,7 +59,7 @@ Widget build(BuildContext context){
                 children: [
                   Image.asset("assets/subscribe.png",
                   height: 220,
-                  width:450,),
+                  width:420,),
              CustomTextFormField(
             label :   AppLocalization.of(context).translate('first_name')!,
             controller : widget.controllerName ,
@@ -123,7 +73,8 @@ Widget build(BuildContext context){
               }
               return null;
             },
-            
+                          icon: Icons.person,
+
           ),
             const SizedBox(height: 18), 
 
@@ -140,9 +91,70 @@ Widget build(BuildContext context){
               }
               return null;
             },
-            
+              icon: Icons.person,
+
           ),
           const SizedBox(height: 20,),
+         CustomTextFormField(
+                      label: AppLocalization.of(context)
+                          .translate('email')!,
+                      controller: widget.controllerEmail,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalization.of(context)
+                              .translate('email_empty')!;
+                        } else {
+                          if (!_emailRegex.hasMatch(value)) {
+                            return AppLocalization.of(context)
+                                .translate('email_error')!;
+                          }
+                        }
+                        return null;
+                      },
+                      icon: Icons.email,
+                    ),
+     
+
+                     const SizedBox(height: 20,),
+                   CustomTextFormField(
+                      label: AppLocalization.of(context)
+                          .translate('specialization')!,
+                      controller: widget.controllerSpecialization,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalization.of(context)
+                              .translate('specialization_empty')!;
+                        } else {
+                          if (value.length<6) {
+                            return AppLocalization.of(context)
+                                .translate('specialization_error')!;
+                          }
+                        }
+                        return null;
+                      },
+                      icon: Icons.category,
+                    ),
+                    const SizedBox(height: 20,),
+
+                    CustomTextFormField(
+                      label: AppLocalization.of(context)
+                          .translate('nb_hours')!,
+                      controller: widget.controllerHours,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalization.of(context)
+                              .translate('nb_hours_error')!;
+                        } else {
+                          if (value.length<3) {
+                            return AppLocalization.of(context)
+                                .translate('nb_hours_error')!;
+                          }
+                        }
+                        return null;
+                      },
+                      icon: Icons.lock_clock,
+                    ),
+                    const SizedBox(height: 20,),
 
                    Center( 
                     child: Row(
@@ -174,7 +186,7 @@ Widget CustomStyledButton(Function onPressed, String buttonText) {
     child: ElevatedButton(
       onPressed: onPressed as void Function()?,
       style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 76, 139, 175),
+        primary: Color.fromARGB(255, 118, 183, 221),
         onPrimary: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),
@@ -194,20 +206,7 @@ Widget CustomStyledButton(Function onPressed, String buttonText) {
   );
 }
 
- Future<void> _selectDate(BuildContext context) async {
-    
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate,
-      firstDate: DateTime(1910),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
-  }
+ 
 }
 
 

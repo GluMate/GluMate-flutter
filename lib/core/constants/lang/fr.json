@@ -14,6 +14,12 @@
     "last_name": "Nom de famille",
     "last_name_empty": "Veuillez saisir votre nom de famille",
     "last_name_error": "Le nom de famille doit comporter au moins 3 caractères",
+    "specialization": "Specialité",
+    "specialization_empty": "Veuillez saisir votre specialité",  
+    "specialization_error": "Le nom de specialité doit comporter au moins 5 caractères",  
+    "nb_hours": "Nombre d'heures",
+    "nb_hours_empty": "Veuillez saisir un nombre d'heures",
+    "nb_hours_error": "Veuillez saisir un nombre d'heures",
     "email": "E-mail",
     "email_empty": "Veuillez saisir votre e-mail",
     "email_error": "E-mail invalide",
@@ -35,6 +41,7 @@
     "create_account": "Créer un compte",
     "sign_in": "Se connecter",
     "join_patients": "Rejoignez nos patients !",
+    "join_doctors": "Rejoignez nos docteurs !",
     "welcome_back": "Bienvenue de retour !",
     "language" : "langue" 
 

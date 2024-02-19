@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';

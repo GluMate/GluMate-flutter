@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/pages/register_doctor_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/pages/register_patient_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/doctor_register_form1.dart';
 import 'package:provider/provider.dart';
@@ -109,7 +110,7 @@ class _roleWidgetState extends State<roleWidget> {
                 } else if (selectedRole == 2) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegisterPatientPage()),
+                    MaterialPageRoute(builder: (context) => const RegisterDoctorPage()),
                   );                }
 
               }, AppLocalization.of(context).translate('next')!),

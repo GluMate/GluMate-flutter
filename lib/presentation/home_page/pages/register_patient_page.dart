@@ -19,8 +19,8 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
 
   final TextEditingController _controllerName = TextEditingController();
   final TextEditingController _controllerLastName = TextEditingController();
-    final TextEditingController _controllerpassword = TextEditingController();
-        final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerpassword = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
 
     final int _selectedGender = 1;
     final DateTime _selectedDate = DateTime.now();

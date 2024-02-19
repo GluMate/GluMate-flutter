@@ -81,7 +81,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                 width: 250,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // Navigate to roleWidget when the button is pressed
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -90,8 +89,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                   },
                                   style: ElevatedButton.styleFrom(
                                       elevation: 20,
-                                      backgroundColor: Colors.blueAccent,
-                                      shadowColor: Colors.blue.withOpacity(1),
+                                      backgroundColor: Color.fromARGB(255, 118, 183, 221),
+                                      shadowColor: const Color.fromARGB(255, 144, 198, 243).withOpacity(1),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       )),
@@ -121,13 +120,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                           .translate('already_memeber')!,
                                       style: GoogleFonts.roboto(
                                           fontSize: 12,
-                                          color: Colors.blueAccent)))
+                                          color: Color.fromARGB(255, 76, 139, 175),)))
                             ],
                           ),
                         ),
                       ],
                     ),
-                    // Blur effect when the button is pressed
                     isBlurred
                         ? GestureDetector(
                             onTap: () {
@@ -140,7 +138,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             ),
                           )
                         : Container(),
-                    // Popup rectangle widget
                     isBlurred
                         ? Align(
                             alignment: Alignment.bottomCenter,
@@ -195,7 +192,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       builder: (BuildContext context) {
         return Consumer<LocaleProvider>(
             builder: (context, localeProvider, _) => LanguageView((newLocale) {
-                  // Call setLocale method with the new locale
                   localeProvider.setLocale(newLocale);
                 }));
       },

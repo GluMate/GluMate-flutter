@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.emailAddress,
       controller: controller,
       style: TextStyle(color: Colors.black),
       decoration: InputDecoration(

@@ -27,8 +27,7 @@ class _RegisterForm2State extends State<RegisterForm2> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerpassword = TextEditingController();
-  final TextEditingController _controllerpasswordconfirm =
-      TextEditingController();
+  final TextEditingController _controllerpasswordconfirm = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,47 +68,43 @@ class _RegisterForm2State extends State<RegisterForm2> {
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('password')!,
-                      controller: widget.controllerPassword,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('password_empty')!;
-                        } else {
-                          if (value.length < 6) {
-                            return AppLocalization.of(context)
-                                .translate('password_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.password,
-                      onChanged: (value) {
-                        setState(() {
-                          password = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('confirm_password')!,
-                      controller: _controllerpasswordconfirm,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('confirm_password_empty')!;
-                        } else {
-                          // if (value!= password) {
-                          //   print(password);
-                          //   return AppLocalization.of(context).translate('confirm_password_error')!;
-                          // }
-                        }
-                        return null;
-                      },
-                      icon: Icons.password,
-                    ),
+  label: AppLocalization.of(context).translate('password')!,
+  controller: widget.controllerPassword,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return AppLocalization.of(context).translate('password_empty')!;
+    } else {
+      if (value.length < 6) {
+        return AppLocalization.of(context).translate('password_error')!;
+      }
+    }
+    return null;
+  },
+  icon: Icons.password,
+  onChanged: (value) {
+    setState(() {
+      password = value;
+    });
+  },
+),
+const SizedBox(height: 20),
+CustomTextFormField(
+  label: AppLocalization.of(context).translate('confirm_password')!,
+  controller: _controllerpasswordconfirm,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return AppLocalization.of(context).translate('confirm_password_empty')!;
+    } else {
+      if (value != password) {
+        return AppLocalization.of(context)
+            .translate('confirm_password_error')!;
+      }
+    }
+    return null;
+  },
+  icon: Icons.password,
+),
+
                     const SizedBox(height: 30),
                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
