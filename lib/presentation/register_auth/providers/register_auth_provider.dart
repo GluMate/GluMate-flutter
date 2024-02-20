@@ -21,7 +21,7 @@ class RegisterAuthProvider extends ChangeNotifier {
   String _errorRegisterMessage = "";
   String _errorLoginMessage = "" ;
   String get errorRegisterMessage => _errorRegisterMessage;
-    String get errorLoginMessage => _errorLoginMessage;
+  String get errorLoginMessage => _errorLoginMessage;
 
     void setRegisterErrorMessage(String newError) {
     _setErrorRegisterMessage(newError);

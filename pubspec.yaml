@@ -48,6 +48,7 @@ dependencies:
   provider: ^6.1.1
   google_fonts: ^6.1.0
   shared_preferences: ^2.2.2
+  animated_toggle_switch: ^0.8.1
   lottie: ^3.0.0
   flutter_localizations:
     sdk: flutter
