@@ -20,8 +20,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   String? password;
-  RegExp get _emailRegex =>
-      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  RegExp get _emailRegex => RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   final _formKey = GlobalKey<FormState>();
 
@@ -32,13 +31,12 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           Padding(
-       padding: const EdgeInsets.only(top: 2.0),
+            padding: const EdgeInsets.only(top: 2.0),
             child: Column(
-
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/login.png", 
+                  "assets/login.png",
                   height: 300,
                   width: 450,
                 ),
@@ -83,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                 ),
                 SizedBox(height: 25),
-                Center( 
+                Center(
                   child: Column(
                     children: [
                       Row(
@@ -99,7 +97,7 @@ class _LoginFormState extends State<LoginForm> {
                           ),
                         ],
                       ),
-                SizedBox(height: 28),
+                      SizedBox(height: 28),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -133,26 +131,22 @@ class _LoginFormState extends State<LoginForm> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                          onTap: () {
-                           },
-                          child: Image.asset(
-                         'assets/google_png.png', 
-                          width: 30,
-                          height: 30,
-      ),
-    ),                        
-                     SizedBox(width: 50),
-
+                            onTap: () {},
+                            child: Image.asset(
+                              'assets/google_png.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                          ),
+                          SizedBox(width: 50),
                           IconButton(
                             icon: Icon(
                               Icons.facebook,
                               size: 35,
                               color: Colors.blue,
                             ),
-                            onPressed: () {
-                            },
+                            onPressed: () {},
                           ),
-                          
                         ],
                       ),
                     ],
@@ -173,9 +167,10 @@ class _LoginFormState extends State<LoginForm> {
       child: ElevatedButton(
         onPressed: onPressed as void Function()?,
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 76, 139, 175),
-          onPrimary: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 76, 139, 175),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         ),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 15),
