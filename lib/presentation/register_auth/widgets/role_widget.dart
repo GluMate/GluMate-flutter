@@ -111,7 +111,7 @@ class _roleWidgetState extends State<roleWidget> {
                 } else if (selectedRole == 2) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegisterDoctorPage()),
+                    MaterialPageRoute(builder: (context) => const ProfileView()),
                   );                }
 
               }, AppLocalization.of(context).translate('next')!),

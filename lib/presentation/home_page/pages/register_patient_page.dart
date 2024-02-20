@@ -52,7 +52,7 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
             controllerEmail: _controllerEmail,
             controllerPassword: _controllerpassword,
             onFinish: ()  {
-             registerProvider.eitherFailureOrRagister(
+             registerProvider.eitherFailureOrRegister(
               firstName: _controllerName ,
                lastName : _controllerLastName ,
                 email : _controllerEmail ,
@@ -64,11 +64,16 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
           );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Success")),
-          );
-        }
+       } else {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        AppLocalization.of(context).translate('success')!,
+      ),
+    ),
+  );
+}
+
                   });
                 
             },
@@ -81,7 +86,7 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
           );
        return Consumer<RegisterAuthProvider>(
       builder: (context, registerProvider, _) {
-  return Scaffold(
+      return Scaffold(
       appBar: AppBar(
         title:  Text(AppLocalization.of(context).translate('join_patients')!),
       ),

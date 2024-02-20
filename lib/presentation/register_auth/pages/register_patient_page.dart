@@ -20,9 +20,8 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
   final TextEditingController _controllerLastName = TextEditingController();
   final TextEditingController _controllerpassword = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
-
-    final int _selectedGender = 1;
-    final DateTime _selectedDate = DateTime.now();
+   int _selectedGender = 1;
+  DateTime _selectedDate = DateTime.now();
 
 
       void nextPage() {
@@ -51,7 +50,7 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
             controllerEmail: _controllerEmail,
             controllerPassword: _controllerpassword,
             onFinish: ()  {
-             registerProvider.eitherFailureOrRagister(
+             registerProvider.eitherFailureOrRegister(
               firstName: _controllerName ,
                lastName : _controllerLastName ,
                 email : _controllerEmail ,
@@ -64,9 +63,8 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
             SnackBar(content: Text(errorMessage)),
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Success")),
-          );
+         showSuccessNotification(context, "Success");
+
         }
                   });
                 
@@ -90,4 +88,24 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
        );
 
   }
-}
+  
+void showSuccessNotification(BuildContext context, String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Success"),
+        content: Text(
+  AppLocalization.of(context).translate('account')!),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); 
+            },
+            child: Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}}

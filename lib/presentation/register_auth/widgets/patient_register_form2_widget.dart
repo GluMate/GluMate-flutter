@@ -112,7 +112,7 @@ CustomTextFormField(
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Color.fromARGB(218, 91, 169, 233),
-                            minimumSize: Size(150, 50), // Adjust size
+                            minimumSize: Size(150, 50), 
                           ),
                           onPressed: () {
                             widget.onBack!();
@@ -128,7 +128,7 @@ CustomTextFormField(
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Color.fromARGB(218, 91, 169, 233),
-                            minimumSize: Size(150, 50), // Adjust size
+                            minimumSize: Size(150, 50), 
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

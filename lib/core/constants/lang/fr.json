@@ -43,6 +43,7 @@
     "join_patients": "Rejoignez nos patients !",
     "join_doctors": "Rejoignez nos docteurs !",
     "welcome_back": "Bienvenue de retour !",
-    "language" : "langue" 
-
+    "language" : "langue" ,
+    "account": "Votre compte a été créé avec succès ",
+    "success" : "Succès"
 }
