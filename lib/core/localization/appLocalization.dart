@@ -1,4 +1,3 @@
-/* 本地化内容 */
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ class AppLocalization {
     return Localizations.of<AppLocalization>(context, AppLocalization)!;
   }
 
-  // 将json文件读取到一个map中，方便使用
   late Map<String, String> _localizedStrings;
 
   Future<void> load() async {
@@ -33,11 +31,9 @@ class AppLocalization {
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
-  // This delegate instance will never change
   const _AppLocalizationsDelegate();
 
   
-  // 检查是否支持该语言
   @override
   bool isSupported(Locale locale) {
     return ['en', 'fr'].contains(locale.languageCode);

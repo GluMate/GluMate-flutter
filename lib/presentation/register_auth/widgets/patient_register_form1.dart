@@ -8,10 +8,10 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_wid
 
 class registerForm1 extends StatefulWidget {
 
-   final TextEditingController controllerName;
+  final TextEditingController controllerName;
   final TextEditingController controllerLastName;
    int selectedGender = 1 ;
-   final VoidCallback? onNextPressed ;
+    final void Function(int,DateTime) onNextPressed;
     DateTime selectedDate = DateTime.now();
 
   registerForm1({
@@ -20,8 +20,9 @@ class registerForm1 extends StatefulWidget {
     required this.controllerLastName,
     required this.selectedGender,
     required this.selectedDate,
-    this.onNextPressed
+    required this.onNextPressed  
   }) : super(key: key);
+
 
   @override
   _registerForm1State createState() => _registerForm1State();
@@ -42,6 +43,8 @@ class _registerForm1State extends State<registerForm1> {
       onPressed: () {
         setState(() {
           selectedGender = index;
+          widget.selectedGender = selectedGender ;
+        
         });
       },
       style: OutlinedButton.styleFrom(
@@ -63,8 +66,8 @@ class _registerForm1State extends State<registerForm1> {
               Image.asset(
                 assetName,
                 fit: BoxFit.contain,
-                width: 120,
-                height: 120,
+                width: 100,
+                height: 100,
               ),
               SizedBox(height: 5),
               Text(
@@ -98,9 +101,18 @@ Widget build(BuildContext context){
       builder: (context, registerProvider, _) {
   return Form(
     key: _formKey,
-    child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    child: SingleChildScrollView(
+            child: Container(
+                padding: EdgeInsets.only(
+                top: 0,
+                left: 28,
+                right: 28,
+              ),
+                child: Column(
+                children: [
+                  Image.asset("assets/subscribe.png",
+                  height: 220,
+                  width:450,),
              CustomTextFormField(
             label :   AppLocalization.of(context).translate('first_name')!,
             controller : widget.controllerName ,
@@ -116,7 +128,7 @@ Widget build(BuildContext context){
             },
             
           ),
-            const SizedBox(height: 10), 
+            const SizedBox(height: 18), 
 
                 CustomTextFormField(
             label :   AppLocalization.of(context).translate('last_name')!,
@@ -133,18 +145,17 @@ Widget build(BuildContext context){
             },
             
           ),
-          const SizedBox(height: 10,),
-Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          const SizedBox(height: 20,),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               CustomGenderButton("assets/male.jpg", 1 , AppLocalization.of(context).translate('male')!),
+               CustomGenderButton("assets/male1.jpg", 1 , AppLocalization.of(context).translate('male')!),
                
                 const SizedBox(
-                  width: 10,
+                  width:20,
                 ),
                  CustomGenderButton(
                       "assets/female.png", 2 , AppLocalization.of(context).translate('female')!),
-               
               ],
             ),
         
@@ -157,27 +168,56 @@ Row(
                     child:  Text(
                       AppLocalization.of(context).translate('select_DOB')!)),
                                 const SizedBox(height: 10), 
- Row(
-              children: [
-
-       
-                  ElevatedButton(onPressed: () {
-            if (_formKey.currentState!.validate()){
-                widget.onNextPressed!();
-
-            }
-          }, child:  Text(
-            AppLocalization.of(context).translate('next')!
-          )
-          )
-              ],
-            )
-        
-        ]
-  )
+                   Center( 
+                    child: Row(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomStyledButton(
+                          () {
+                            if (_formKey.currentState!.validate()) {
+                              widget.onNextPressed(selectedGender,_selectedDate);
+                            }
+                          },
+                          AppLocalization.of(context).translate('next')!,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+Widget CustomStyledButton(Function onPressed, String buttonText) {
+  return SizedBox(
+    width: 200,
+    height: 50,
+    child: ElevatedButton(
+      onPressed: onPressed as void Function()?,
+      style: ElevatedButton.styleFrom(
+        primary: Color.fromARGB(255, 118, 183, 221),
+        onPrimary: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15),
+        child: Center(
+          child: Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    ),
   );
-      });
 }
+
  Future<void> _selectDate(BuildContext context) async {
     
     final DateTime? picked = await showDatePicker(
@@ -189,6 +229,8 @@ Row(
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
+        widget.selectedDate = _selectedDate;
+        print(widget.selectedDate);
       });
     }
   }
