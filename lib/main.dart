@@ -5,6 +5,7 @@ import 'package:glumate_flutter/core/localization/appLocalization.dart';
 
 import 'package:glumate_flutter/presentation/register_auth/providers/Locale_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/main_tab.dart';
 
 import 'package:glumate_flutter/widget_tree.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      home: const App(),
+      home: const MainTabView(),
     );
   }
 }
