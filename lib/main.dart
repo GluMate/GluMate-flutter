@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      home: const MainTabView(),
+      home: const App(),
     );
   }
 }

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 
 
 class TitleSubtitleCell extends StatelessWidget {

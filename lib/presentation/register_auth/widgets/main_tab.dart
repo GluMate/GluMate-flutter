@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/chat_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/profile.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/tabButton.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/tabButton.dart';
 
 
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/doctor_register_form1.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Register/doctor_register_form1.dart';
 import 'package:provider/provider.dart';
 
 class RegisterDoctorPage extends StatefulWidget {

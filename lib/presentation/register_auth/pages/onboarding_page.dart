@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/pages/login_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/Locale_provider.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Register/role_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/language_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/role_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/chatModel.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chatModel.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/members.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/receiver_row_view.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/sender_row_view.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/receiver_row_view.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/sender_row_view.dart';
 
 class MyChatUI extends StatefulWidget {
   const MyChatUI({Key? key}) : super(key: key);
