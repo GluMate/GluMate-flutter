@@ -2,11 +2,11 @@
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Round_Button.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/notificationView.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Round_Button.dart';
+
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/Round_Button.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/notificationView.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/workout.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
@@ -120,7 +120,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     IconButton(
                         onPressed: () {
-                         Navigator.push(
+                       Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => const NotificationView(),

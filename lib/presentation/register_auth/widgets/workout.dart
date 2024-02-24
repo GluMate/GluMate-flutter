@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 
 class WorkoutRow extends StatelessWidget {

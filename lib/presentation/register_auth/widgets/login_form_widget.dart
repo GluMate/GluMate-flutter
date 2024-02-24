@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
 
 class LoginForm extends StatefulWidget {
   final TextEditingController controllerEmail;
@@ -32,13 +32,14 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+       padding: const EdgeInsets.only(top: 2.0),
             child: Column(
+
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
                   "assets/login.png", 
-                  height: 250,
+                  height: 300,
                   width: 450,
                 ),
                 CustomTextFormField(
@@ -81,18 +82,78 @@ class _LoginFormState extends State<LoginForm> {
                     });
                   },
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: 25),
                 Center( 
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      CustomStyledButton(
-                        () {
-                          if (_formKey.currentState!.validate()) {
-                            widget.onLogin!();
-                          }
-                        },
-                        AppLocalization.of(context).translate('sign_in')!,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomStyledButton(
+                            () {
+                              if (_formKey.currentState!.validate()) {
+                                widget.onLogin!();
+                              }
+                            },
+                            AppLocalization.of(context).translate('sign_in')!,
+                          ),
+                        ],
+                      ),
+                SizedBox(height: 28),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              thickness: 1,
+                              color: Color.fromARGB(235, 169, 167, 167),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              AppLocalization.of(context).translate('or')!,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 103, 162, 211),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              thickness: 1,
+                              color: Color.fromARGB(235, 169, 167, 167),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                          onTap: () {
+                           },
+                          child: Image.asset(
+                         'assets/google_png.png', 
+                          width: 30,
+                          height: 30,
+      ),
+    ),                        
+                     SizedBox(width: 50),
+
+                          IconButton(
+                            icon: Icon(
+                              Icons.facebook,
+                              size: 35,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                            },
+                          ),
+                          
+                        ],
                       ),
                     ],
                   ),
