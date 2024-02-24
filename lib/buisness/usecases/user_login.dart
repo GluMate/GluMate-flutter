@@ -9,4 +9,9 @@ class UserLogin {
   Future<void> callUserLogin({required UserLoginRequest userLoginRequest}) async {
      await repository.userLogin(body: userLoginRequest);
   }
+
+
+  Future<void> callUserLogout() async {
+     await repository.userLogout();
+  }
 }

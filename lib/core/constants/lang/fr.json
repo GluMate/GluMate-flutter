@@ -45,5 +45,6 @@
     "welcome_back": "Bienvenue de retour !",
     "language" : "langue" ,
     "account": "Votre compte a été créé avec succès ",
-    "success" : "Succès"
+    "success" : "Succès",
+    "sign_out" : "Se déconnecter"
 }

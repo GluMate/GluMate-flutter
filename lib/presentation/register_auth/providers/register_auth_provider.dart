@@ -16,9 +16,12 @@ class RegisterAuthProvider extends ChangeNotifier {
     this.failure,
   });
   String _errorRegisterMessage = "";
+  String _errorLogoutMessage = "";
   String _errorLoginMessage = "";
   String get errorRegisterMessage => _errorRegisterMessage;
   String get errorLoginMessage => _errorLoginMessage;
+    String get errorLogoutMessage => _errorLogoutMessage;
+
 
   void setRegisterErrorMessage(String newError) {
     _setErrorRegisterMessage(newError);
@@ -28,12 +31,19 @@ class RegisterAuthProvider extends ChangeNotifier {
     _setErrorLoginMessage(newError);
   }
 
+  void setLogoutErrorMessage(String newError) {
+    _setErrorLogoutMessage(newError);
+  }
   void _setErrorRegisterMessage(String newError) {
     _errorRegisterMessage = newError;
     notifyListeners();
   }
 
   void _setErrorLoginMessage(String newError) {
+    _errorLoginMessage = newError;
+    notifyListeners();
+  }
+    void _setErrorLogoutMessage(String newError) {
     _errorLoginMessage = newError;
     notifyListeners();
   }
@@ -97,10 +107,25 @@ setRegisterErrorMessage("");
       setLoginErrorMessage(FireBaseAuthFailure(errorMessage: "incorrect Email/password").errorMessage);
     } on NetworkFailure {
       setLoginErrorMessage(NetworkFailure().errorMessage);
-    } on ServerFailure {
-      setLoginErrorMessage(ServerFailure().errorMessage);
     } on AppFailure {
       setLoginErrorMessage(AppFailure().errorMessage);
+    }
+  }
+
+  Future<void> eitherFailureOrLogout() async {
+    UserRepositoryImpl repository = UserRepositoryImpl(
+      userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
+      networkInfo: NetworkInfoImpl(DataConnectionChecker()),
+    );
+    setLogoutErrorMessage("");
+
+    try { 
+      await UserLogin(repository).callUserLogout();
+      
+    }  on NetworkFailure {
+      setLogoutErrorMessage(NetworkFailure().errorMessage);
+    } on AppFailure {
+      setLogoutErrorMessage(AppFailure().errorMessage);
     }
   }
 }

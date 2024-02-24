@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:glumate_flutter/core/errors/failure.dart';
 
 
 class Auth {
@@ -14,11 +15,16 @@ Future<void> signInWithEmailAndPassword({
   required String email,
   required String password,
 }) async {
-  await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+ 
+await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  
+  
 }
 
 Future<void> signOut() async {
+  
   await _firebaseAuth.signOut();
+
 }
 
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/pages/login_page.dart';
+import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Round_Button.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/SettingRow.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/title_subtitle.dart';
+import 'package:provider/provider.dart';
 
 
 class ProfileView extends StatefulWidget {
@@ -50,7 +54,12 @@ class _ProfileViewState extends State<ProfileView> {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+                Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout(); // signout from provider (change it to another propriate place please) you can also achieve the lougout's error messages from provider (errorLogoutMessage)) 
+                if ( Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
+                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoginPage()));
+                }
+            },
             child: Container(
               margin: const EdgeInsets.all(8),
               height: 40,
@@ -59,12 +68,14 @@ class _ProfileViewState extends State<ProfileView> {
               decoration: BoxDecoration(
                   color: TColor.lightGray,
                   borderRadius: BorderRadius.circular(10)),
-              child: Image.asset(
-                "assets/more_btn.png",
-                width: 15,
-                height: 15,
-                fit: BoxFit.contain,
-              ),
+                  //change it when you remove the signout
+              // child: Image.asset(
+              //   "assets/more_btn.png",
+              //   width: 15,
+              //   height: 15,
+              //   fit: BoxFit.contain,
+              // ),
+              child: Text(AppLocalization.of(context).translate('sign_out')!),
             ),
           )
         ],
