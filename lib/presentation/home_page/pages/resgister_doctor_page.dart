@@ -17,7 +17,7 @@ class _registerDoctorPageState extends State<RegisterDoctorPage> {
   final TextEditingController _controllerLastName = TextEditingController();
   final TextEditingController _controllerHours = TextEditingController();
   final TextEditingController _controllerSpecialization = TextEditingController();
-  final TextEditingController _controllerEmail= TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
 
   void nextPage() {
     setState(() {
@@ -34,7 +34,6 @@ class _registerDoctorPageState extends State<RegisterDoctorPage> {
             controllerHours: _controllerHours,
             controllerSpecialization: _controllerSpecialization,
             controllerEmail: _controllerEmail,
-
             onNextPressed: () {
               setState(() {
                 _currentPageIndex = 1;
@@ -42,13 +41,12 @@ class _registerDoctorPageState extends State<RegisterDoctorPage> {
             },
           )
         : Container(); 
-
     return Consumer<RegisterAuthProvider>(
       builder: (context, registerProvider, _) {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              AppLocalization.of(context).translate('join_doctors')!,
+               AppLocalization.of(context).translate('join_doctors')!,
             ),
           ),
           body: currentPage,
