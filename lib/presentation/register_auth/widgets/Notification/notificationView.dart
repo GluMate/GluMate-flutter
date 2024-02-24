@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/NotificationRow.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/NotificationRow.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/colors.dart';
 
 

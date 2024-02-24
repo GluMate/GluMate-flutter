@@ -3,6 +3,7 @@ import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/login_form_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/main_tab.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -45,13 +46,10 @@ class _LoginPageState extends State<LoginPage> {
                         SnackBar(content: Text(authProvider.errorLoginMessage)),
                       );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Succeed")),
-                      );
-                      // Navigate to the HomePage on successful login
+                
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeView()),
+                        MaterialPageRoute(builder: (context) => MainTabView()),
                       );
                     }
                   });

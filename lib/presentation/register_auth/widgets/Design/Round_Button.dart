@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
+
 
 
 

@@ -51,8 +51,23 @@ class UserRepositoryImpl implements UserRepository {
   } on FirebaseAuthException catch (e) {
     print('FireBaseAuth Error : ${e.code} ; message : ${e.message}');
     throw FireBaseAuthFailure(errorMessage: e.message!);
+    } catch (e) {
+      throw AppFailure();
     }
 
+  } else {
+   throw NetworkFailure();  
+  }
+    
+  }
+  
+  @override
+  Future<void> userLogout() async {
+
+    if (await networkInfo.isConnected!){
+      
+        await Auth().signOut();
+  
   } else {
    throw NetworkFailure();  
   }

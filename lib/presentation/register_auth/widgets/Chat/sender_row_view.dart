@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/chat_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/members.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
+
 
 
 class SenderRowView extends StatelessWidget {
