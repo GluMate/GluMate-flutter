@@ -2,16 +2,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_widget.dart';
 
 class registerForm1 extends StatefulWidget {
 
   final TextEditingController controllerName;
   final TextEditingController controllerLastName;
    int selectedGender = 1 ;
-   final VoidCallback? onNextPressed ;
+    final void Function(int,DateTime) onNextPressed;
     DateTime selectedDate = DateTime.now();
 
   registerForm1({
@@ -20,8 +20,9 @@ class registerForm1 extends StatefulWidget {
     required this.controllerLastName,
     required this.selectedGender,
     required this.selectedDate,
-    this.onNextPressed
+    required this.onNextPressed  
   }) : super(key: key);
+
 
   @override
   _registerForm1State createState() => _registerForm1State();
@@ -42,6 +43,8 @@ class _registerForm1State extends State<registerForm1> {
       onPressed: () {
         setState(() {
           selectedGender = index;
+          widget.selectedGender = selectedGender ;
+        
         });
       },
       style: OutlinedButton.styleFrom(
@@ -172,7 +175,7 @@ Widget build(BuildContext context){
                         CustomStyledButton(
                           () {
                             if (_formKey.currentState!.validate()) {
-                              widget.onNextPressed!();
+                              widget.onNextPressed(selectedGender,_selectedDate);
                             }
                           },
                           AppLocalization.of(context).translate('next')!,
@@ -226,6 +229,8 @@ Widget CustomStyledButton(Function onPressed, String buttonText) {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
+        widget.selectedDate = _selectedDate;
+        print(widget.selectedDate);
       });
     }
   }

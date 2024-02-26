@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '';
 import 'package:glumate_flutter/core/errors/failure.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
 import 'package:intl/intl.dart';
 
 class roleWidget extends StatefulWidget {

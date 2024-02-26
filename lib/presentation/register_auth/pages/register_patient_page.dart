@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/pages/login_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/patient_register_form1.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/patient_register_form1.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/patient_register_form2_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Register/patient_register_form1.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Register/patient_register_form2_widget.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPatientPage extends StatefulWidget {
@@ -100,11 +100,16 @@ void showSuccessNotification(BuildContext context, String message) {
       return AlertDialog(
         title: Text("Success"),
         content: Text(
-  AppLocalization.of(context).translate('account')!),
+          AppLocalization.of(context).translate('account')!,
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); 
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
             },
             child: Text('OK'),
           ),
@@ -112,4 +117,6 @@ void showSuccessNotification(BuildContext context, String message) {
       );
     },
   );
+
+
 }}

@@ -46,5 +46,6 @@
     "language" : "langue" ,
     "account": "Votre compte a été créé avec succès ",
     "success" : "Succès",
-    "sign_out" : "Se déconnecter"
+    "sign_out" : "Se déconnecter",
+    "or": "ou"
 }

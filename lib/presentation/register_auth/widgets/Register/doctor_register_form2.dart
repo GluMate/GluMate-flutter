@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/text_form_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
 
 class RegisterDoctorForm2 extends StatefulWidget {
   final TextEditingController controllerBio;

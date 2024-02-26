@@ -43,7 +43,9 @@ class _MainTabViewState extends State<MainTabView> {
                       color: Colors.black12,
                       blurRadius: 2,)
                 ]),
-            child: Icon(Icons.monitor_heart_outlined,color: TColor.white, size: 35, ),
+            child: Icon(
+              Icons.health_and_safety,
+              color: TColor.white, size: 35, ),
           ),
         ),
       ),

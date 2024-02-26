@@ -46,7 +46,8 @@
    "language" : "language" ,
    "account": "Your account has been created successfully",
    "success" : "Success",
-   "sign_out" : "Sign out"
+   "sign_out" : "Sign out",
+   "or": "or"
 
 
    
