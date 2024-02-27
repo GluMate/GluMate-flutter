@@ -47,5 +47,6 @@
     "account": "Votre compte a été créé avec succès ",
     "success" : "Succès",
     "sign_out" : "Se déconnecter",
-    "or": "ou"
+    "or": "ou",
+    "forgot_password": "Mot de passe oublié ?"
 }

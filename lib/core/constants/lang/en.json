@@ -33,22 +33,22 @@
    "female": "Female" ,
    "care_provider": "Care provider" ,
    "patient" : "Patient" ,
-   "select_DOB" : "Select your Date of Birth" ,
+   "select_DOB" : "Select your date of birth" ,
    "select_gender" : "Select your gender " ,
    "select_role" : "Who are you ?" ,
    "next" : "Next" ,
    "previous" : "Previous" ,
    "create_account" : "Create account" ,
-   "sign_in" : "Sign In" ,
+   "sign_in" : "Sign in" ,
    "join_patients" : "Join our patients !" ,
    "join_doctors" : "Join our care providers !" ,
    "welcome_back" : "Welcome back !",
-   "language" : "language" ,
+   "language" : "Language" ,
    "account": "Your account has been created successfully",
    "success" : "Success",
    "sign_out" : "Sign out",
-   "or": "or"
-
+   "or": "or",
+   "forgot_password": "Forgot password ?"
 
    
     

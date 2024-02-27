@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chatModel.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/receiver_row_view.dart';
@@ -11,6 +12,7 @@ class MyChatUI extends StatefulWidget {
   @override
   MyChatUIState createState() => MyChatUIState();
 }
+    int _currentPageIndex = 0;
 
 var url =
     'https://i.pinimg.com/736x/fd/6e/04/fd6e04548095d7f767917f344a904ff1.jpg';
@@ -21,7 +23,11 @@ class MyChatUIState extends State<MyChatUI> {
   var controller = TextEditingController();
   var scrollController = ScrollController();
   var message = '';
-
+  void nextPage() {
+    setState(() {
+      _currentPageIndex++;
+    });
+  }
   void animateList() {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
     Future.delayed(const Duration(milliseconds: 100), () {
@@ -38,7 +44,7 @@ class MyChatUIState extends State<MyChatUI> {
       appBar: AppBar(
         elevation: 12,
         titleSpacing: 10,
-        backgroundColor: const Color.fromARGB(255, 102, 127, 217),
+        backgroundColor: TColor.primaryColor1 , 
         leading: Padding(
           padding: EdgeInsets.all(8.0),
           child: IconButton(
@@ -48,11 +54,12 @@ class MyChatUIState extends State<MyChatUI> {
             ),
             onPressed: () {
                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeView(),
-                            ),
-                          );            },
+                 context,
+                 MaterialPageRoute(
+                 builder: (context) => const HomeView(),
+                 ),
+                 );      
+                                },
           ),
         ),
         leadingWidth: 20,
