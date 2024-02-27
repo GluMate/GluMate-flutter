@@ -3,7 +3,7 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors
 
 class NotificationRow extends StatelessWidget {
   final Map nObj;
-  const NotificationRow({super.key, required this.nObj});
+  const NotificationRow({Key? key, required this.nObj}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,46 +11,46 @@ class NotificationRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Image.asset(
-              nObj["image"].toString(),
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            ),
+          Image.asset(
+            nObj["image"].toString(),
+            width: 40,
+            height: 40,
+            fit: BoxFit.cover,
           ),
           const SizedBox(
             width: 15,
           ),
           Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                nObj["title"].toString(),
-                style: TextStyle(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  nObj["title"].toString(),
+                  style: TextStyle(
                     color: TColor.black,
                     fontWeight: FontWeight.w500,
-                    fontSize: 12),
-              ),
-              Text(
-                nObj["time"].toString(),
-                style: TextStyle(
-                  color: TColor.gray,
-                  fontSize: 10,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-            ],
-          )),
+                Text(
+                  nObj["time"].toString(),
+                  style: TextStyle(
+                    color: TColor.gray,
+                    fontSize: 10,
+                  ),
+                ),
+              ],
+            ),
+          ),
           IconButton(
-              onPressed: () {},
-              icon: Image.asset(
-                "assets/sub_menu.png",
-                width: 15,
-                height: 15,
-                fit: BoxFit.contain,
-              ))
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/sub_menu.png",
+              width: 15,
+              height: 15,
+              fit: BoxFit.contain,
+            ),
+          ),
         ],
       ),
     );
