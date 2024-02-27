@@ -15,7 +15,7 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
-    bool isBlurred = false;
+  bool isBlurred = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           'assets/boarding.gif',
                           width: 320,
                         ),
-                        SizedBox(height: 15,),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Container(
                           height: 50,
                           width: 250,
@@ -83,18 +85,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         SizedBox(
                           width: 250,
                           child: ElevatedButton(
-                           onPressed: () {
-                                      setState(() {
-                          isBlurred = !isBlurred;
-                        });
-                                 
-                                  },
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => roleWidget(),
+                                ),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               elevation: 20,
                               backgroundColor:
                                   Color.fromARGB(255, 118, 183, 221),
-                              shadowColor: const Color.fromARGB(255, 144, 198, 243)
-                                  .withOpacity(1),
+                              shadowColor:
+                                  const Color.fromARGB(255, 144, 198, 243)
+                                      .withOpacity(1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -124,8 +129,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             AppLocalization.of(context)
                                 .translate('already_memeber')!,
                             style: GoogleFonts.roboto(
-                                fontSize: 12,
-                                color: Color.fromARGB(255, 76, 139, 175),
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 76, 139, 175),
                             ),
                           ),
                         ),
@@ -134,59 +139,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                 ],
               ),
-                isBlurred
-                        ? GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                isBlurred = false;
-                              });
-                            },
-                            child: Container(
-                              color: Colors.black.withOpacity(0.3),
-                            ),
-                          )
-                        : Container(),
-                    isBlurred
-                        ? Align(
-                            alignment: Alignment.bottomCenter,
-                            child: AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
-                              height:
-                                  MediaQuery.of(context).size.height / 3,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Center(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => roleWidget()),
-                                    );
-                                  },
-                                 style: ElevatedButton.styleFrom(
-                                      elevation: 20,
-                                      backgroundColor: Color.fromARGB(255, 118, 183, 221),
-                                      shadowColor: const Color.fromARGB(255, 144, 198, 243).withOpacity(1),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      )),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      AppLocalization.of(context)
-                                          .translate('sign_up_with_email')!,
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 20, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
             ],
           ),
         ),
