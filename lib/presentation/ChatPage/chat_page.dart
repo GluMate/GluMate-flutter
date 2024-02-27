@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:glumate_flutter/buisness/chat_service.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/chat_bubble.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiverUserEmail;
@@ -46,6 +47,7 @@ class _ChatPageState extends State<ChatPage> {
 
           //user input
           _buildMessageInput(),
+          const SizedBox(height: 25),
         ],
       ),
     );
@@ -88,7 +90,8 @@ class _ChatPageState extends State<ChatPage> {
       child: Column(
         children: [
           Text(data['senderEmail']),
-          Text(data['message']),
+          const SizedBox(height: 5),
+          ChatBubble(message: data['message']),
         ],
       ),
     );
@@ -96,26 +99,29 @@ class _ChatPageState extends State<ChatPage> {
 
   // build message input
   Widget _buildMessageInput() {
-    return Row(
-      children: [
-        //textfield
-        Expanded(
-          child: TextField(
-            controller: _messageController,
-            obscureText: false,
-            decoration:
-                new InputDecoration.collapsed(hintText: 'Enter Message'),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Row(
+        children: [
+          //textfield
+          Expanded(
+            child: TextField(
+              controller: _messageController,
+              obscureText: false,
+              decoration:
+                  new InputDecoration.collapsed(hintText: 'Enter Message'),
+            ),
           ),
-        ),
-        //send button
-        IconButton(
-          onPressed: sendMessage,
-          icon: const Icon(
-            Icons.arrow_upward,
-            size: 40,
-          ),
-        )
-      ],
+          //send button
+          IconButton(
+            onPressed: sendMessage,
+            icon: const Icon(
+              Icons.arrow_upward,
+              size: 40,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
