@@ -151,7 +151,7 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(218, 91, 169, 233),
+                            backgroundColor: Color.fromARGB(218, 91, 169, 233),
                             minimumSize: Size(150, 50), // Adjust size
                           ),
                           onPressed: () {
