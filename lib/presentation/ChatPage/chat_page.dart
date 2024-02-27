@@ -87,6 +87,7 @@ class _ChatPageState extends State<ChatPage> {
 
     return Container(
       alignment: alignment,
+      margin: EdgeInsets.all(10),
       child: Column(
         children: [
           Text(data['senderEmail']),
