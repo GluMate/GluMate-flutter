@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerpassword = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,38 +24,42 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text(AppLocalization.of(context).translate('welcome_back')!),
         ),
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LoginForm(
-                controllerEmail: _controllerEmail,
-                controllerPassword: _controllerpassword,
-                onLogin: () {
-                  authProvider.eitherFailureOrLogin(
-                    email: _controllerEmail,
-                    passsword: _controllerpassword,
-                  ).then((result) {
-               
-                    if (authProvider.errorLoginMessage.isNotEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(authProvider.errorLoginMessage)),
-                      );
-                    } else {
-                
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainTabView()),
-                      );
-                    }
-                  });
-                },
-              )
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoginForm(
+                  controllerEmail: _controllerEmail,
+                  controllerPassword: _controllerPassword,
+                  onLogin: () {
+                    authProvider
+                        .eitherFailureOrLogin(
+                      email: _controllerEmail,
+                      passsword: _controllerPassword,
+                    )
+                        .then((result) {
+                      if (authProvider.errorLoginMessage.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(authProvider.errorLoginMessage)),
+                        );
+                      } else {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainTabView()),
+                        );
+                      }
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       );
