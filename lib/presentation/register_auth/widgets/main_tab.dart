@@ -1,10 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/profile.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/tabButton.dart';
+import 'package:glumate_flutter/presentation/tracking_glucose/pages/main_tracking_page.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -13,21 +16,33 @@ class MainTabView extends StatefulWidget {
 
   @override
   State<MainTabView> createState() => _MainTabViewState();
+  
 }
 
 class _MainTabViewState extends State<MainTabView> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<RegisterAuthProvider>(context, listen : false).eitherFailureOrConnectedCachedUser(); 
+  }
   int selectTab = 0;
   final PageStorageBucket pageBucket = PageStorageBucket(); 
   Widget currentTab = const HomeView();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+ return FutureBuilder(
+    future: Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrConnectedCachedUser(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      } else {
+       return Scaffold(
       backgroundColor: TColor.white,
-      body: PageStorage(bucket: pageBucket, child: currentTab),
+      body:  PageStorage(bucket: pageBucket, child: currentTab),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
-        width: 70,
-        height: 70,
+        width: 55,
+        height: 55,
         child: InkWell(
           onTap: () {},
           child: Container(
@@ -43,9 +58,20 @@ class _MainTabViewState extends State<MainTabView> {
                       color: Colors.black12,
                       blurRadius: 2,)
                 ]),
-            child: Icon(
-              Icons.health_and_safety,
-              color: TColor.white, size: 35, ),
+            child: 
+            Center(
+              child:   TabButton(
+                icon: "assets/health_tab.png",
+                selectIcon: "assets/health_tab_select.png",
+                isActive: selectTab == 4,
+                onTap: () {
+                  selectTab = 4;
+                  currentTab =  MainTrackingPage();
+                  if (mounted) {
+                    setState(() {});
+                  }
+                }),)
+           
           ),
         ),
       ),
@@ -108,5 +134,8 @@ class _MainTabViewState extends State<MainTabView> {
         ),
       )),
     );
+      }
+    } );
+   
   }
 }

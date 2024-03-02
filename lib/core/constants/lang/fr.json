@@ -47,5 +47,8 @@
     "account": "Votre compte a été créé avec succès ",
     "success" : "Succès",
     "sign_out" : "Se déconnecter",
-    "or": "ou"
+    "or": "ou",
+    "new_record" : "Mesure",
+    "date_time" : "Date et temps : ",
+    "Tracker_page" : "Moniteur"
 }

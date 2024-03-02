@@ -47,8 +47,10 @@
    "account": "Your account has been created successfully",
    "success" : "Success",
    "sign_out" : "Sign out",
-   "or": "or"
-
+   "or": "or",
+   "new_record" : "Measurement",
+   "date_time" : "Date and time : ",
+   "Tracker_page" : "Tracker"
 
    
     

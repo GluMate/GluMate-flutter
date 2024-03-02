@@ -1,5 +1,6 @@
 
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:glumate_flutter/core/config.dart';
 import 'package:glumate_flutter/core/errors/failure.dart';
@@ -7,6 +8,7 @@ import 'package:glumate_flutter/data/models/user_model.dart';
 
 abstract class UserRemoteDataSource {
   Future<void> patientRegister({required PatientRequest body });
+  Future<UserModel> getUser({required String uid});
 
 
 }
@@ -43,5 +45,16 @@ catch (e){
 }
 
   }
+
+ Future<UserModel> getUser({required String uid}) async {
+   String getUserURL = "${AppConfig.baseUrl}user/$uid" ;
+  try{
+final response = await dio.get ( getUserURL );
+ return UserModel.fromJson(response.data);
+  } catch (e) {
+  print(e);
+        throw ServerFailure();
+  }
+ }
   
 }

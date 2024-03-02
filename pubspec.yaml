@@ -55,6 +55,8 @@ dependencies:
   simple_circular_progress_bar: ^1.0.2
   flutter_localizations:
     sdk: flutter
+  numberpicker: ^2.1.2
+  syncfusion_flutter_sliders: ^24.2.7
 
 dev_dependencies:
   flutter_test:

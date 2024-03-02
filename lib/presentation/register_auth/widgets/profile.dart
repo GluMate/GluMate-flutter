@@ -17,6 +17,11 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+   @override
+  void initState() {
+    super.initState();
+    Provider.of<RegisterAuthProvider>(context, listen : false).eitherFailureOrConnectedCachedUser(); 
+  }
   bool positive = false;
 
   List accountArr = [
@@ -112,7 +117,7 @@ class _ProfileViewState extends State<ProfileView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hanine Bouguerra",
+                          Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser!.firstName + " " + Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser!.lastName,
                           style: TextStyle(
                             color: TColor.black,
                             fontSize: 14,

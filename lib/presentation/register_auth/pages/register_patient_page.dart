@@ -22,7 +22,7 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
   final TextEditingController _controllerEmail = TextEditingController();
    int _selectedGender = 1;
   DateTime _selectedDate = DateTime.now();
-
+  bool _isLoading = false; 
 
       void nextPage() {
     setState(() {
@@ -48,37 +48,47 @@ class _registerPatientPageState extends State<RegisterPatientPage> {
               });
             },
           ) 
-          :  Consumer<RegisterAuthProvider>(
-      builder: (context, registerProvider, _) => RegisterForm2(
-            controllerEmail: _controllerEmail,
-            controllerPassword: _controllerpassword,
-            onFinish: ()  {
-    
-             registerProvider.eitherFailureOrRegister(
-              firstName: _controllerName ,
-               lastName : _controllerLastName ,
-                email : _controllerEmail ,
-                 password : _controllerpassword , 
-                 selectedgender : _selectedGender ,
-                  selectedDate : _selectedDate).then((_)  {
-                     
-        if (registerProvider.errorRegisterMessage.isNotEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(registerProvider.errorRegisterMessage)),
-          );
-        } else {
-         showSuccessNotification(context, "Success");
-
-        }
+          :  AbsorbPointer(
+            absorbing: _isLoading,
+            child: Opacity(
+              opacity: _isLoading ? 0.5 : 1.0,
+              child: Consumer<RegisterAuthProvider>(
+                    builder: (context, registerProvider, _) => RegisterForm2(
+                controllerEmail: _controllerEmail,
+                controllerPassword: _controllerpassword,
+                onFinish: ()  {
+                    setState(() {
+                          _isLoading = true; // Set isLoading to true when login button is pressed
+                        });
+                 registerProvider.eitherFailureOrRegister(
+                  firstName: _controllerName ,
+                   lastName : _controllerLastName ,
+                    email : _controllerEmail ,
+                     password : _controllerpassword , 
+                     selectedgender : _selectedGender ,
+                      selectedDate : _selectedDate).then((_)  {
+                        setState(() {
+                          _isLoading = false; // Set isLoading to true when login button is pressed
+                        });   
+                      if (registerProvider.errorRegisterMessage.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(registerProvider.errorRegisterMessage)),
+              );
+                      } else {
+                       showSuccessNotification(context, "Success");
+              
+                      }
+                      });
+                    
+                },
+                 onBack: () {
+                  setState(() {
+                    _currentPageIndex = 0;
                   });
-                
-            },
-             onBack: () {
-              setState(() {
-                _currentPageIndex = 0;
-              });
-            },
-      )
+                },
+                    )
+              ),
+            ),
           );
        return Consumer<RegisterAuthProvider>(
       builder: (context, registerProvider, _) {
