@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/pages/ForgotPasswordPage.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/ForgotPassword.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/ForgotPassword.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -163,7 +164,7 @@ class _LoginFormState extends State<LoginForm> {
                         Navigator.push(
                         context,
                         MaterialPageRoute(
-                        builder: (context) => ForgotPasswordView(),
+                        builder: (context) => ForgotPasswordPage(),
                         ),);
                         },
                          child: Text(

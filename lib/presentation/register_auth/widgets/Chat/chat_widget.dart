@@ -77,16 +77,8 @@ class MyChatUIState extends State<MyChatUI> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(Icons.videocam_rounded),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(Icons.call),
-          ),
-        ],
+       
+        
       ),
       body: Column(
         children: [

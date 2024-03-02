@@ -20,7 +20,7 @@
   "nb_hours": "Number of hours",
   "nb_hours_empty": "Please enter the number of hours",
   "nb_hours_error": "Please enter the number of hours",
-   "email": "Email" ,
+   "email": "Email address" ,
    "email_empty": "Please Enter your email" ,
    "email_error": "Invalid email",
    "password": "Password" ,
@@ -48,8 +48,15 @@
    "success" : "Success",
    "sign_out" : "Sign out",
    "or": "or",
-   "forgot_password": "Forgot password ?"
+   "forgot_password": "Forgot password ?", 
+   "reset": "Reset password",
+   "envoyer": "Send",
+   "please_enter_email": "Please enter your email adress, a verification code will be sent to you !",
+   "not_verified": "You haven't received a verification code?",
+   "resend": "Resend code ", 
+   "update_password": "Now you can change your password !",
+   "verify_code" : "Please enter the code sent by email ", 
+   "verify": "Verify"
 
-   
     
   }

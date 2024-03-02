@@ -35,7 +35,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         fillColor: Colors.white,
         prefixIcon: widget.icon != null
             ? Icon(widget.icon, color: Color.fromARGB(218, 91, 169, 233))
-            : null, // Added prefixIcon
+            : null, 
         suffixIcon: widget.icon == Icons.password
             ? IconButton(
                 icon: Icon(
