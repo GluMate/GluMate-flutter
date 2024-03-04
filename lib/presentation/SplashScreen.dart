@@ -9,23 +9,25 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(218, 171, 204, 230),
+      backgroundColor: Colors.white,
       body: Center(
-        child: AnimatedSplashScreen(
-          splash: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.4,
-                height: MediaQuery.of(context).size.height * 0.4,
-                child: LottieBuilder.asset("assets/Lottie/splash.json"),
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: AnimatedSplashScreen(
+            splash: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: LottieBuilder.asset("assets/Lottie/Splash1.json"),
+                ),
+              ],
+            ),
+            nextScreen: const OnBoardingPage(),
+            splashIconSize: 10,
+            backgroundColor: Color.fromARGB(218, 202, 228, 247),
           ),
-          nextScreen: const OnBoardingPage(),
-          splashIconSize: 10,
-          backgroundColor: Color.fromARGB(218, 202, 228, 247),
         ),
       ),
     );

@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/pages/ForgotPasswordPage.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/ForgotPassword.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginForm extends StatefulWidget {
   final TextEditingController controllerEmail;
@@ -32,13 +38,12 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           Padding(
-       padding: const EdgeInsets.only(top: 2.0),
+            padding: const EdgeInsets.only(top: 2.0),
             child: Column(
-
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/login.png", 
+                  "assets/login.png",
                   height: 300,
                   width: 450,
                 ),
@@ -83,7 +88,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                 ),
                 SizedBox(height: 25),
-                Center( 
+                Center(
                   child: Column(
                     children: [
                       Row(
@@ -99,7 +104,7 @@ class _LoginFormState extends State<LoginForm> {
                           ),
                         ],
                       ),
-                SizedBox(height: 28),
+                      SizedBox(height: 28),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -133,27 +138,42 @@ class _LoginFormState extends State<LoginForm> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                          onTap: () {
-                           },
-                          child: Image.asset(
-                         'assets/google_png.png', 
-                          width: 30,
-                          height: 30,
-      ),
-    ),                        
-                     SizedBox(width: 50),
-
+                            onTap: () {
+                              signInWithGoogle();
+                            },
+                            child: Image.asset(
+                              'assets/google_png.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                          ),
+                          SizedBox(width: 50),
                           IconButton(
                             icon: Icon(
                               Icons.facebook,
                               size: 35,
                               color: Colors.blue,
                             ),
-                            onPressed: () {
-                            },
+                            onPressed: () {},
                           ),
-                          
                         ],
+                      ),
+                      SizedBox(height: 5),
+                      TextButton(
+                        onPressed: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => ForgotPasswordPage(),
+                        ),);
+                        },
+                         child: Text(
+                            AppLocalization.of(context)
+                                .translate('forgot_password')!,
+                            style: GoogleFonts.roboto(
+                                fontSize: 12,
+                                color: Color.fromARGB(255, 76, 139, 175),
+                            ),),
                       ),
                     ],
                   ),
@@ -191,5 +211,40 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await GoogleSignIn().signIn();
+
+      if (googleSignInAccount == null) {
+        return;
+      }
+
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      final UserCredential authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = authResult.user;
+
+      print('User signed in with Google: ${user?.displayName}');
+
+      if (user != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeView(),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error signing in with Google: $e');
+    }
   }
 }

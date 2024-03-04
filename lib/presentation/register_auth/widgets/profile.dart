@@ -76,8 +76,8 @@ class _ProfileViewState extends State<ProfileView> {
       ),
       child: IconButton(
         icon: Icon(
-          Icons.logout, // Use the icon you want for logout
-          color: Colors.black, // Customize the color if needed
+          Icons.logout, 
+          color: Colors.black, 
         ),
         onPressed: () {
           Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();

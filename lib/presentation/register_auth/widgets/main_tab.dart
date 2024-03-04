@@ -9,8 +9,6 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/Design/tabBut
 import 'package:glumate_flutter/presentation/tracking_glucose/pages/main_tracking_page.dart';
 import 'package:provider/provider.dart';
 
-
-
 class MainTabView extends StatefulWidget {
   const MainTabView({super.key});
 
@@ -26,8 +24,9 @@ class _MainTabViewState extends State<MainTabView> {
     Provider.of<RegisterAuthProvider>(context, listen : false).eitherFailureOrConnectedCachedUser(); 
   }
   int selectTab = 0;
-  final PageStorageBucket pageBucket = PageStorageBucket(); 
+  final PageStorageBucket pageBucket = PageStorageBucket();
   Widget currentTab = const HomeView();
+
   @override
   Widget build(BuildContext context) {
  return FutureBuilder(
@@ -41,8 +40,8 @@ class _MainTabViewState extends State<MainTabView> {
       body:  PageStorage(bucket: pageBucket, child: currentTab),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
-        width: 55,
-        height: 55,
+        width: 60,
+        height: 60,
         child: InkWell(
           onTap: () {},
           child: Container(

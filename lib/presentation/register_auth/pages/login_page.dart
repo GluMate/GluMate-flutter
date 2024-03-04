@@ -26,31 +26,31 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text(AppLocalization.of(context).translate('welcome_back')!),
         ),
+      
         body: AbsorbPointer(
           absorbing: _isLoading,
           child: Opacity(
             opacity: _isLoading ? 0.5 : 1.0,
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LoginForm(
-                    controllerEmail: _controllerEmail,
-                    controllerPassword: _controllerpassword,
-                    onLogin: () async {
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LoginForm(
+                      controllerEmail: _controllerEmail,
+                      controllerPassword: _controllerpassword,
+                      onLogin: () async {
                         setState(() {
                         _isLoading = true; // Set isLoading to true when login button is pressed
                       });
                      await authProvider.eitherFailureOrLogin(
                         email: _controllerEmail,
                         passsword: _controllerpassword,
-                      );
-                      // await authProvider.eitherFailureOrConnectedUser();
-                      
+                      );  
                      setState(() {
                         _isLoading = false; // Set isLoading to true when login button is pressed
                       });
@@ -66,14 +66,16 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         }
                       
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
+                    }
+                    )
+                  ]
+                )
+              )
+            )
+          )
+        )
       );
-    });
+                        });
+                      
   }
 }
