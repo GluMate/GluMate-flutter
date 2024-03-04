@@ -1,5 +1,7 @@
 
 
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:glumate_flutter/core/config.dart';
@@ -46,15 +48,21 @@ catch (e){
 
   }
 
- Future<UserModel> getUser({required String uid}) async {
-   String getUserURL = "${AppConfig.baseUrl}user/$uid" ;
-  try{
-final response = await dio.get ( getUserURL );
- return UserModel.fromJson(response.data);
+Future<UserModel> getUser({required String uid}) async {
+  String getUserURL = "${AppConfig.baseUrl}user/$uid";
+  try {
+    final response = await dio.get(getUserURL);
+    return UserModel.fromJson(response.data);
+  } on DioException catch (e) {
+    if (e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout) {
+      throw TimeoutException('Connection timed out');
+    } else {
+      throw ServerFailure();
+    }
   } catch (e) {
-  print(e);
-        throw ServerFailure();
+    print(e);
+    throw ServerFailure();
   }
- }
   
+}
 }

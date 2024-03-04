@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:glumate_flutter/core/errors/exceptions.dart';
@@ -25,7 +27,10 @@ Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
       
       await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   
-       final userRemoteDataSource = UserRemoteDataSourceImpl(dio: Dio());
+       final userRemoteDataSource = UserRemoteDataSourceImpl(dio: Dio(BaseOptions(
+  connectTimeout: const Duration(milliseconds: 500), 
+  receiveTimeout: const Duration(milliseconds: 500), 
+)));
       final userLocalDataSource = UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance());
       final remoteUser = await userRemoteDataSource.getUser(uid: Auth().currentUser!.uid);
       await userLocalDataSource.cacheUser(remoteUser);
@@ -39,6 +44,8 @@ Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
     } on CacheException catch(e) {
        await _firebaseAuth.signOut();
       throw AppFailure();
+    } on TimeoutException catch (e) {
+      throw ServerFailure();
     } catch (e) {
        await _firebaseAuth.signOut();
       print('Unexpected error: $e');
