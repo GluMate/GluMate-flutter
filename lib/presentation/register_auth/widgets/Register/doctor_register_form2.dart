@@ -30,18 +30,18 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _controllerBio = TextEditingController();
   final TextEditingController _controllerpassword = TextEditingController();
-  final TextEditingController _controllerpasswordconfirm = TextEditingController();
+  final TextEditingController _controllerpasswordconfirm =
+      TextEditingController();
   final TextEditingController _controllerDiploma = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset(
-              "assets/subscribe.png", 
+              "assets/subscribe.png",
               height: 250,
               width: 460,
             ),
@@ -52,7 +52,7 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     CustomTextFormField(
+                    CustomTextFormField(
                       label: AppLocalization.of(context)
                           .translate('specialization')!,
                       controller: widget.controllerBio,
@@ -61,7 +61,7 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                           return AppLocalization.of(context)
                               .translate('specialization_empty')!;
                         } else {
-                          if (value.length<6) {
+                          if (value.length < 6) {
                             return AppLocalization.of(context)
                                 .translate('specialization_error')!;
                           }
@@ -71,7 +71,7 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                       icon: Icons.description,
                     ),
                     const SizedBox(height: 20),
-                     CustomTextFormField(
+                    CustomTextFormField(
                       label: AppLocalization.of(context)
                           .translate('specialization')!,
                       controller: widget.controllerDiploma,
@@ -80,7 +80,7 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                           return AppLocalization.of(context)
                               .translate('specialization_empty')!;
                         } else {
-                          if (value.length<6) {
+                          if (value.length < 6) {
                             return AppLocalization.of(context)
                                 .translate('specialization_error')!;
                           }
@@ -90,58 +90,60 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                       icon: Icons.school,
                     ),
                     CustomTextFormField(
-  label: AppLocalization.of(context).translate('password')!,
-  controller: widget.controllerPassword,
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return AppLocalization.of(context).translate('password_empty')!;
-    } else {
-      if (value.length < 6) {
-        return AppLocalization.of(context).translate('password_error')!;
-      }
-    }
-    return null;
-  },
-  icon: Icons.password,
-  onChanged: (value) {
-    setState(() {
-      password = value;
-    });
-  },
-),
-const SizedBox(height: 20),
-CustomTextFormField(
-  label: AppLocalization.of(context).translate('confirm_password')!,
-  controller: _controllerpasswordconfirm,
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return AppLocalization.of(context).translate('confirm_password_empty')!;
-    } else {
-      if (value != password) {
-        return AppLocalization.of(context)
-            .translate('confirm_password_error')!;
-      }
-    }
-    return null;
-  },
-  icon: Icons.password,
-),
-
+                      label: AppLocalization.of(context).translate('password')!,
+                      controller: widget.controllerPassword,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalization.of(context)
+                              .translate('password_empty')!;
+                        } else {
+                          if (value.length < 6) {
+                            return AppLocalization.of(context)
+                                .translate('password_error')!;
+                          }
+                        }
+                        return null;
+                      },
+                      icon: Icons.password,
+                      onChanged: (value) {
+                        setState(() {
+                          password = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextFormField(
+                      label: AppLocalization.of(context)
+                          .translate('confirm_password')!,
+                      controller: _controllerpasswordconfirm,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalization.of(context)
+                              .translate('confirm_password_empty')!;
+                        } else {
+                          if (value != password) {
+                            return AppLocalization.of(context)
+                                .translate('confirm_password_error')!;
+                          }
+                        }
+                        return null;
+                      },
+                      icon: Icons.password,
+                    ),
                     const SizedBox(height: 30),
-                   Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(218, 91, 169, 233),
+                            backgroundColor: Color.fromARGB(218, 91, 169, 233),
                             minimumSize: Size(150, 50), // Adjust size
                           ),
                           onPressed: () {
                             widget.onBack!();
                           },
                           child: Text(
-                            AppLocalization.of(context)
-                                .translate('previous')!,
+                            AppLocalization.of(context).translate('previous')!,
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -149,7 +151,7 @@ CustomTextFormField(
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(218, 91, 169, 233),
+                            backgroundColor: Color.fromARGB(218, 91, 169, 233),
                             minimumSize: Size(150, 50), // Adjust size
                           ),
                           onPressed: () {
@@ -158,8 +160,7 @@ CustomTextFormField(
                             }
                           },
                           child: Text(
-                            AppLocalization.of(context)
-                                .translate('next')!,
+                            AppLocalization.of(context).translate('next')!,
                             style: TextStyle(
                               color: Colors.white,
                             ),

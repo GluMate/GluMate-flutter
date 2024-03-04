@@ -26,8 +26,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   String? password;
-  RegExp get _emailRegex =>
-      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  RegExp get _emailRegex => RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   final _formKey = GlobalKey<FormState>();
 
@@ -193,9 +192,10 @@ class _LoginFormState extends State<LoginForm> {
       child: ElevatedButton(
         onPressed: onPressed as void Function()?,
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 76, 139, 175),
-          onPrimary: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 76, 139, 175),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         ),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 15),

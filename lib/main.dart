@@ -10,14 +10,25 @@ import 'package:glumate_flutter/presentation/tracking_glucose/providers/gluc_rec
 
 import 'package:glumate_flutter/widget_tree.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+
+import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/NotificationService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterBlue flutterBlue = FlutterBlue.instance;
+
+  // Initialize Firebase
   await Firebase.initializeApp();
+
+  // Initialize the NotificationService
+  NotificationService notificationService = NotificationService();
+  await notificationService.init(); // Call the init method
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LocaleProvider()), 
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => RegisterAuthProvider()),
              ChangeNotifierProvider(create: (_) => GlucoseProvider()),
       ],
@@ -33,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: Provider.of<LocaleProvider>(context).locale, 
+      locale: Provider.of<LocaleProvider>(context).locale,
       supportedLocales: const [
         Locale("en", ""),
         Locale("fr", ""),

@@ -50,7 +50,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           'assets/boarding.gif',
                           width: 320,
                         ),
-                        SizedBox(height: 15,),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Container(
                           height: 50,
                           width: 250,
@@ -95,8 +97,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               elevation: 20,
                               backgroundColor:
                                   Color.fromARGB(255, 118, 183, 221),
-                              shadowColor: const Color.fromARGB(255, 144, 198, 243)
-                                  .withOpacity(1),
+                              shadowColor:
+                                  const Color.fromARGB(255, 144, 198, 243)
+                                      .withOpacity(1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -126,8 +129,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             AppLocalization.of(context)
                                 .translate('already_memeber')!,
                             style: GoogleFonts.roboto(
-                                fontSize: 12,
-                                color: Color.fromARGB(255, 76, 139, 175),
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 76, 139, 175),
                             ),
                           ),
                         ),

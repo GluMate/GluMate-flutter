@@ -1,7 +1,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.BLUETOOTH"/>
+<uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+<uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+<uses-permission android:name="android.permission.BLUETOOTH_STACK"/>
+<uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+<uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+<uses-permission android:name="android.permission.BLUETOOTH_MAP"/>
+<uses-permission android:name="android.permission.BLUETOOTH_SECURE"/>
+<uses-permission android:name="android.permission.BLUETOOTH_SHARING"/>
+<uses-permission android:name="android.permission.BLUETOOTH_PAIRING"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
-        android:label="glumate_flutter"
+        android:label="GluMate"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <!-- Required to fetch data from the internet. -->
