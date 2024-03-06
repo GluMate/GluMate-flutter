@@ -41,9 +41,7 @@ class _MainTrackingPageState extends State<MainTrackingPage> {
       appBar: AppBar(
         title: Text(AppLocalization.of(context).translate('Tracker_page')!,
          style:  GoogleFonts.roboto(color: TColor.primaryColor1),),
-            iconTheme: IconThemeData(
-    color: TColor.primaryColor1, 
-  ),
+
         
       ),
       body: SingleChildScrollView(
