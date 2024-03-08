@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginForm extends StatefulWidget {
   final TextEditingController controllerEmail;
@@ -131,7 +135,9 @@ class _LoginFormState extends State<LoginForm> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              signInWithGoogle();
+                            },
                             child: Image.asset(
                               'assets/google_png.png',
                               width: 30,
@@ -148,6 +154,18 @@ class _LoginFormState extends State<LoginForm> {
                             onPressed: () {},
                           ),
                         ],
+                      ),
+                      SizedBox(height: 5),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          AppLocalization.of(context)
+                              .translate('forgot_password')!,
+                          style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 76, 139, 175),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -186,5 +204,40 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await GoogleSignIn().signIn();
+
+      if (googleSignInAccount == null) {
+        return;
+      }
+
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      final UserCredential authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = authResult.user;
+
+      print('User signed in with Google: ${user?.displayName}');
+
+      if (user != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeView(),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error signing in with Google: $e');
+    }
   }
 }
