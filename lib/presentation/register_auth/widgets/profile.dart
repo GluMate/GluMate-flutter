@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
+import 'package:glumate_flutter/presentation/register_auth/pages/EditProfilePage.dart';
 import 'package:glumate_flutter/presentation/register_auth/pages/login_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/Round_Button.dart';
@@ -8,30 +9,27 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/Design/title_
 import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/SettingRow.dart';
 import 'package:provider/provider.dart';
 
-
 class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrConnectedCachedUser();
+  }
+
   bool positive = false;
 
   List accountArr = [
     {"image": "assets/p_personal.png", "name": "Personal Data", "tag": "1"},
     {"image": "assets/p_achi.png", "name": "Achievement", "tag": "2"},
-    {
-      "image": "assets/p_activity.png",
-      "name": "Activity History",
-      "tag": "3"
-    },
-    {
-      "image": "assets/p_workout.png",
-      "name": "Workout Progress",
-      "tag": "4"
-    }
+    {"image": "assets/p_activity.png", "name": "Activity History", "tag": "3"},
+    {"image": "assets/p_workout.png", "name": "Workout Progress", "tag": "4"}
   ];
 
   List otherArr = [
@@ -39,8 +37,26 @@ class _ProfileViewState extends State<ProfileView> {
     {"image": "assets/p_privacy.png", "name": "Privacy Policy", "tag": "6"},
     {"image": "assets/p_setting.png", "name": "Setting", "tag": "7"},
   ];
+
+String calculateAge(DateTime? birthDate) {
+  if (birthDate == null) return "Unknown";
+  
+  DateTime currentDate = DateTime.now();
+  int age = currentDate.year - birthDate.year;
+  
+  if (currentDate.month < birthDate.month || (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
+    age--;
+  }
+
+  return age >= 0 ? age.toString() : "Unknown";
+}
+
+
   @override
   Widget build(BuildContext context) {
+    var cachedUser = Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser;
+String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dateOfBirth ?? '') : null);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TColor.white,
@@ -49,42 +65,40 @@ class _ProfileViewState extends State<ProfileView> {
         leadingWidth: 0,
         title: Text(
           "Profile",
-          style: TextStyle(
-              color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+          style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
         actions: [
-  InkWell(
-    onTap: () {
-      Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();
-      if (Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-      }
-    },
-    child: Container(
-      margin: const EdgeInsets.all(8),
-      height: 40,
-      width: 40,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: TColor.lightGray,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: IconButton(
-        icon: Icon(
-          Icons.logout, 
-          color: Colors.black, 
-        ),
-        onPressed: () {
-          Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();
-          if (Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-          }
-        },
-      ),
-    ),
-  ),
-],
-
+          InkWell(
+            onTap: () {
+              Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();
+              if (Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              }
+            },
+            child: Container(
+              margin: const EdgeInsets.all(8),
+              height: 40,
+              width: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: TColor.lightGray,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();
+                  if (Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: TColor.white,
       body: SingleChildScrollView(
@@ -112,7 +126,7 @@ class _ProfileViewState extends State<ProfileView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hanine Bouguerra",
+                          cachedUser != null ? "${cachedUser.firstName} ${cachedUser.lastName}" : "",
                           style: TextStyle(
                             color: TColor.black,
                             fontSize: 14,
@@ -120,7 +134,7 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                         ),
                         Text(
-                          "Patiente",
+                    cachedUser != null ? "${cachedUser.role} " : "",
                           style: TextStyle(
                             color: TColor.gray,
                             fontSize: 12,
@@ -138,12 +152,12 @@ class _ProfileViewState extends State<ProfileView> {
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const ActivityTrackerView(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProfilePage(),
+                          ),
+                        );
                       },
                     ),
                   )
@@ -152,7 +166,7 @@ class _ProfileViewState extends State<ProfileView> {
               const SizedBox(
                 height: 15,
               ),
-              const Row(
+              Row(
                 children: [
                   Expanded(
                     child: TitleSubtitleCell(
@@ -169,13 +183,12 @@ class _ProfileViewState extends State<ProfileView> {
                       subtitle: "Weight",
                     ),
                   ),
-
                   SizedBox(
                     width: 15,
                   ),
                   Expanded(
                     child: TitleSubtitleCell(
-                      title: "22yo",
+                      title: userAge,
                       subtitle: "Age",
                     ),
                   ),
@@ -185,14 +198,11 @@ class _ProfileViewState extends State<ProfileView> {
                 height: 25,
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 decoration: BoxDecoration(
                     color: TColor.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(color: Colors.black12, blurRadius: 2)
-                    ]),
+                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -226,122 +236,74 @@ class _ProfileViewState extends State<ProfileView> {
               const SizedBox(
                 height: 25,
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
+              GestureDetector(
+                onTap: () {
+                  /*  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BluetoothDevicesView()),
+                  );*/
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
                     color: TColor.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(color: Colors.black12, blurRadius: 2)
-                    ]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Notification",
-                      style: TextStyle(
-                        color: TColor.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Bluetooth",
+                        style: TextStyle(
+                          color: TColor.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    SizedBox(
-                      height: 30,
-                      child: Row(
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset("assets/p_notification.png",
-                                height: 15, width: 15, fit: BoxFit.contain),
+                            Image.asset(
+                              "assets/bluetooth.png",
+                              height: 15,
+                              width: 15,
+                              fit: BoxFit.contain,
+                            ),
                             const SizedBox(
                               width: 15,
                             ),
                             Expanded(
                               child: Text(
-                                "Pop-up Notification",
+                                "Bluetooth Devices",
                                 style: TextStyle(
                                   color: TColor.black,
                                   fontSize: 12,
                                 ),
                               ),
                             ),
-                          /*  CustomAnimatedToggleSwitch<bool>(
-                              current: positive,
-                              values: [false, true],
-                              dif: 0.0,
-                              indicatorSize: Size.square(30.0),
-                              animationDuration:
-                                  const Duration(milliseconds: 200),
-                              animationCurve: Curves.linear,
-                              onChanged: (b) => setState(() => positive = b),
-                              iconBuilder: (context, local, global) {
-                                return const SizedBox();
-                              },
-                              defaultCursor: SystemMouseCursors.click,
-                              onTap: () => setState(() => positive = !positive),
-                              iconsTappable: false,
-                              wrapperBuilder: (context, global, child) {
-                                return Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Positioned(
-                                        left: 10.0,
-                                        right: 10.0,
-                                        
-                                        height: 30.0,
-                                        child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                             gradient: LinearGradient(
-                                                colors: TColor.secondaryG),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(50.0)),
-                                          ),
-                                        )),
-                                    child,
-                                  ],
-                                );
-                              },
-                              foregroundIndicatorBuilder: (context, global) {
-                                return SizedBox.fromSize(
-                                  size: const Size(10, 10),
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: TColor.white,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(50.0)),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                            color: Colors.black38,
-                                            spreadRadius: 0.05,
-                                            blurRadius: 1.1,
-                                            offset: Offset(0.0, 0.8))
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),*/
-                          ]),
-                    )
-                  ],
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 25,
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 decoration: BoxDecoration(
                     color: TColor.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(color: Colors.black12, blurRadius: 2)
-                    ]),
+                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

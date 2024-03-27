@@ -19,8 +19,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   final TextEditingController _controllerEmail = TextEditingController();
 
-   int _selectedGender = 1;
-  DateTime _selectedDate = DateTime.now();
 
 
       void nextPage() {

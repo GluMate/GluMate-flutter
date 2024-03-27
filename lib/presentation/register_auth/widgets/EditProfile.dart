@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
@@ -6,41 +8,93 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_f
 import 'package:provider/provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 
-class registerDoctorForm1 extends StatefulWidget {
+class EditProfile extends StatefulWidget {
 
-   final TextEditingController controllerName;
-   final TextEditingController controllerLastName;
-   final TextEditingController controllerHours;
-   final TextEditingController controllerSpecialization;
-   final TextEditingController controllerEmail;
+  final TextEditingController controllerName;
+  final TextEditingController controllerLastName;
+  final TextEditingController controllerEmail;
+  final void Function(int,DateTime) onNextPressed;
+  DateTime selectedDate = DateTime.now();
 
-
-   final VoidCallback? onNextPressed ;
-
-  registerDoctorForm1({
+  EditProfile({
     Key? key,
     required this.controllerName,
     required this.controllerLastName,
-    required this.controllerHours,
-    required this.controllerSpecialization,
-    required this.controllerEmail,
-
-    this.onNextPressed
-   
+    required this.selectedDate,
+    required this.onNextPressed, 
+    required this.controllerEmail  
   }) : super(key: key);
 
+
   @override
-  _registerForm1State createState() => _registerForm1State();
+  _EditProfileState createState() => _EditProfileState();
 
 
 }
 
 
-class _registerForm1State extends State<registerDoctorForm1> {
- RegExp get _emailRegex =>
+class _EditProfileState extends State<EditProfile> {
+
+   int selectedGender = 1 ;
+   DateTime _selectedDate = DateTime.now();
+   final _formKey = GlobalKey<FormState>();
+   RegExp get _emailRegex =>
       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-   
-    final _formKey = GlobalKey<FormState>();
+  Widget CustomGenderButton(String assetName, int index , String buttonText) {
+   return OutlinedButton(
+      onPressed: () {
+        setState(() {
+          selectedGender = index;
+        
+        });
+      },
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        side: BorderSide(
+            width: (selectedGender == index) ? 2.0 : 0.5,
+            color: (selectedGender == index)
+                ? Colors.green
+                : Colors.blue.shade600),
+      ),
+      child: Stack(
+         children: [
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                assetName,
+                fit: BoxFit.contain,
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 5),
+              Text(
+                buttonText,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (selectedGender == index)
+          Positioned(
+            top: 5,
+            right: 5,
+            child: Image.asset(
+              "assets/tick-circle.png",
+              width: 25,
+              fit: BoxFit.cover,
+            ),
+          ),
+      ],
+      ),
+    );
+  }
 
 @override
 Widget build(BuildContext context){
@@ -57,9 +111,10 @@ Widget build(BuildContext context){
               ),
                 child: Column(
                 children: [
-                  Image.asset("assets/subscribe.png",
-                  height: 220,
-                  width:420,),
+                  Image.asset("assets/profile.png",
+                  height: 250,
+                  width:460,),
+
              CustomTextFormField(
             label :   AppLocalization.of(context).translate('first_name')!,
             controller : widget.controllerName ,
@@ -73,7 +128,7 @@ Widget build(BuildContext context){
               }
               return null;
             },
-                          icon: Icons.person,
+                        icon: Icons.person,
 
           ),
             const SizedBox(height: 18), 
@@ -91,11 +146,12 @@ Widget build(BuildContext context){
               }
               return null;
             },
-              icon: Icons.person,
+            icon: Icons.person,
 
           ),
-          const SizedBox(height: 20,),
-         CustomTextFormField(
+            const SizedBox(height: 18), 
+
+            CustomTextFormField(
                       label: AppLocalization.of(context)
                           .translate('email')!,
                       controller: widget.controllerEmail,
@@ -113,49 +169,29 @@ Widget build(BuildContext context){
                       },
                       icon: Icons.email,
                     ),
-     
-
-                     const SizedBox(height: 20,),
-                   CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('specialization')!,
-                      controller: widget.controllerSpecialization,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('specialization_empty')!;
-                        } else {
-                          if (value.length<6) {
-                            return AppLocalization.of(context)
-                                .translate('specialization_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.category,
-                    ),
-                    const SizedBox(height: 20,),
-
-                    CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('nb_hours')!,
-                      controller: widget.controllerHours,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('nb_hours_error')!;
-                        } else {
-                          if (value.length<3) {
-                            return AppLocalization.of(context)
-                                .translate('nb_hours_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.lock_clock,
-                    ),
-                    const SizedBox(height: 20,),
-
+                    const SizedBox(height: 20),
+         SizedBox(height: 5,),
+Row(
+  children: [
+    Padding(
+      padding: const EdgeInsets.only(left: 12.0), 
+      child: Icon(
+        Icons.calendar_today,
+        color: Color.fromARGB(255, 118, 183, 221),
+      ),
+    ),
+    const SizedBox(width: 8), 
+    TextButton(
+      onPressed: () {
+        _selectDate(context);
+      },
+      child: Text(
+        AppLocalization.of(context).translate('select_DOB')!,
+      ),
+    ),
+  ],
+),
+const SizedBox(height: 10),
                    Center( 
                     child: Row(
                          mainAxisAlignment: MainAxisAlignment.center,
@@ -163,10 +199,10 @@ Widget build(BuildContext context){
                         CustomStyledButton(
                           () {
                             if (_formKey.currentState!.validate()) {
-                              widget.onNextPressed!();
+                              widget.onNextPressed(selectedGender,_selectedDate);
                             }
                           },
-                          AppLocalization.of(context).translate('next')!,
+                          AppLocalization.of(context).translate('confirm')!,
                         ),
                       ],
                     ),
@@ -206,7 +242,22 @@ Widget CustomStyledButton(Function onPressed, String buttonText) {
   );
 }
 
- 
+ Future<void> _selectDate(BuildContext context) async {
+    
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(1910),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        widget.selectedDate = _selectedDate;
+        print(widget.selectedDate);
+      });
+    }
+  }
 }
 
 

@@ -128,8 +128,8 @@ Widget CustomStyledButton(Function onPressed, String buttonText) {
     child: ElevatedButton(
       onPressed: onPressed as void Function()?,
       style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 118, 183, 221),
-        onPrimary: Colors.white,
+        foregroundColor: Colors.white,
+         backgroundColor: Color.fromARGB(255, 118, 183, 221),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),
       child: Container(

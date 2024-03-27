@@ -42,7 +42,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   SizedBox(height: 40),
                   Text(
-                   AppLocalization.of(context).translate('please_enter_email')!,
+                    AppLocalization.of(context).translate('please_enter_email')!,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -61,7 +61,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       return null;
                     },
                     icon: Icons.email,
-
                   ),
                   const SizedBox(height: 25),
                   Center(
@@ -69,14 +68,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomStyledButton(
-                          () {
+                          () async {
                             if (_formKey.currentState!.validate()) {
-                                Navigator.push(
+                              await registerProvider.sendActivationCode(email: widget.controllerEmail.text);
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ValidationNumberScreen(),
-                                ), );                         
-                                   }
+                                ),
+                              );
+                            }
                           },
                           AppLocalization.of(context).translate('envoyer')!,
                         ),
@@ -99,8 +100,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       child: ElevatedButton(
         onPressed: onPressed as void Function()?,
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 118, 183, 221),
-          onPrimary: Colors.white,
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 118, 183, 221),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         ),
         child: Container(

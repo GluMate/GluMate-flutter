@@ -2,12 +2,13 @@
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
+import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/notificationView.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/workout.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
@@ -20,6 +21,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   
+ 
   List<int> showingTooltipOnSpots = [21];
 
   List<FlSpot> get allSpots => const [
@@ -89,7 +91,11 @@ class _HomeViewState extends State<HomeView> {
     ];
 
     final tooltipsOnBar = lineBarsData[0];
-
+    if(Provider.of<RegisterAuthProvider>(context, listen : false).isLoading) {
+return  const Center(
+          child: CircularProgressIndicator(),
+        );
+    } else{
     return Scaffold(
       backgroundColor: TColor.white,
       body: SingleChildScrollView(
@@ -110,7 +116,7 @@ class _HomeViewState extends State<HomeView> {
                           style: TextStyle(color: TColor.gray, fontSize: 12),
                         ),
                         Text(
-                          "Hanine Bouguerra",
+                          Provider.of<RegisterAuthProvider>(context, listen : false).cachedUser!.firstName + " " + Provider.of<RegisterAuthProvider>(context, listen : false).cachedUser!.lastName,
                           style: TextStyle(
                               color: TColor.black,
                               fontSize: 20,
@@ -883,7 +889,8 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-    );
+    ); 
+    }
   }
 
   List<PieChartSectionData> showingSections() {

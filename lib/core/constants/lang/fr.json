@@ -48,6 +48,9 @@
     "success" : "Succès",
     "sign_out" : "Se déconnecter",
     "or": "ou",
+    "new_record" : "Mesure",
+    "date_time" : "Date et temps : ",
+    "Tracker_page" : "Moniteur",
     "forgot_password": "Mot de passe oublié ?",
     "reset": "Réinitialiser votre mot de passe",
     "envoyer": "Envoyer",
@@ -56,7 +59,11 @@
     "resend": "Réenvoyer le code", 
     "update_password": "Maintenant, vous pouvez changer votre mot de passe !",
     "verify_code" : "Veuillez entrer le code envoyé par e-mail",
-    "verify": "Verifier"
+    "verify": "Verifier",
+    "update": "Changer votre profil ! ",
+    "confirm": "Confirmer"
+
+
 
 
 }
