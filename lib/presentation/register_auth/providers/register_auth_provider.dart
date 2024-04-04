@@ -3,6 +3,7 @@ import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/buisness/entities/user_entity.dart';
+import 'package:glumate_flutter/buisness/usecases/doctor_register.dart';
 import 'package:glumate_flutter/buisness/usecases/patient_register.dart';
 import 'package:glumate_flutter/buisness/usecases/user_login.dart';
 import 'package:glumate_flutter/core/connection/networ_info.dart';
@@ -108,7 +109,41 @@ setRegisterErrorMessage("");
       setRegisterErrorMessage(AppFailure().errorMessage);
     }
   }
+// register provider 
+Future<void> eitherFailureOrRegisterCareProvider({
+    required TextEditingController firstName,
+    required TextEditingController lastName,
+    required TextEditingController email,
+    required TextEditingController password,
+    required TextEditingController phone,
+  }) async {
+    UserRepositoryImpl repository = UserRepositoryImpl(
+      userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
+      networkInfo: NetworkInfoImpl(DataConnectionChecker()),
+         localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
 
+    );
+
+    try {
+      await DoctorRegister(repository).callDoctorRegister(
+        doctorRegisterRequest: DoctorRequest(
+          firstName: firstName.text,
+          email: email.text,
+          lastName: lastName.text,
+          password: password.text,
+          phone: phone.text , 
+        ),
+      );
+    } on EmailExistsFailure {
+      setRegisterErrorMessage(EmailExistsFailure().errorMessage);
+    } on NetworkFailure {
+      setRegisterErrorMessage(NetworkFailure().errorMessage);
+    } on ServerFailure {
+      setRegisterErrorMessage(ServerFailure().errorMessage);
+    } on AppFailure {
+      setRegisterErrorMessage(AppFailure().errorMessage);
+    }
+  }
   Future<Either<Failure, UserEntity>> eitherFailureOrLogin({
     required TextEditingController email,
     required TextEditingController passsword,

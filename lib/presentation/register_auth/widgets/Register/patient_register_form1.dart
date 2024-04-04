@@ -167,61 +167,7 @@ Widget build(BuildContext context){
                     child:  Text(
                       AppLocalization.of(context).translate('select_DOB')!)),
                                 const SizedBox(height: 10), 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 1,
-                              color: Color.fromARGB(235, 169, 167, 167),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              AppLocalization.of(context).translate('or')!,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 103, 162, 211),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 1,
-                              color: Color.fromARGB(235, 169, 167, 167),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                          onTap: () {
-                           },
-                          child: Image.asset(
-                         'assets/google_png.png', 
-                          width: 30,
-                          height: 30,
-      ),
-    ),                        
-                     SizedBox(width: 50),
-
-                          IconButton(
-                            icon: Icon(
-                              Icons.facebook,
-                              size: 35,
-                              color: Colors.blue,
-                            ),
-                            onPressed: () {
-                            },
-                          ),
-                          
-                        ],
-                      ),
+                     
                       SizedBox(height: 15,),
                    Center( 
                     child: Row(

@@ -173,4 +173,29 @@ Future<Either<Failure, String>> sendActivationCode({required String email}) asyn
   }
 }
 
+  @override
+  Future<void> doctorRegister({required DoctorRequest body}) async{
+    if (await networkInfo.isConnected!){
+    try{
+      await userRemoteDataSource.doctorRegister(body: body);
+            
+     } on EmailExistsFailure {
+
+      throw EmailExistsFailure();
+    }
+    on ServerFailure {
+
+      throw ServerFailure();
+
+    }  on AppFailure {
+
+      throw AppFailure();
+
+    }
+  } else {
+      throw NetworkFailure();
+
+  }
+  }
+
 }

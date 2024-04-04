@@ -10,9 +10,9 @@ class registerDoctorForm1 extends StatefulWidget {
 
    final TextEditingController controllerName;
    final TextEditingController controllerLastName;
-   final TextEditingController controllerHours;
-   final TextEditingController controllerSpecialization;
    final TextEditingController controllerEmail;
+   final TextEditingController controllerPhone;
+
 
 
    final VoidCallback? onNextPressed ;
@@ -21,10 +21,8 @@ class registerDoctorForm1 extends StatefulWidget {
     Key? key,
     required this.controllerName,
     required this.controllerLastName,
-    required this.controllerHours,
-    required this.controllerSpecialization,
     required this.controllerEmail,
-
+    required this.controllerPhone,
     this.onNextPressed
    
   }) : super(key: key);
@@ -117,44 +115,22 @@ Widget build(BuildContext context){
 
                      const SizedBox(height: 20,),
                    CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('specialization')!,
-                      controller: widget.controllerSpecialization,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('specialization_empty')!;
-                        } else {
-                          if (value.length<6) {
-                            return AppLocalization.of(context)
-                                .translate('specialization_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.category,
-                    ),
-                    const SizedBox(height: 20,),
+  label: AppLocalization.of(context).translate('phone')!,
+  controller: widget.controllerPhone,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return AppLocalization.of(context).translate('phone_error')!;
+    } else if (value.length != 8) {
+      return AppLocalization.of(context).translate('phone_error')!;
+    } else if (!RegExp(r'^[2594]').hasMatch(value)) {
+      return AppLocalization.of(context).translate('phone_error')!;
+    }
+    return null;
+  },
+  icon: Icons.phone,
+),
+const SizedBox(height: 20),
 
-                    CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('nb_hours')!,
-                      controller: widget.controllerHours,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('nb_hours_error')!;
-                        } else {
-                          if (value.length<3) {
-                            return AppLocalization.of(context)
-                                .translate('nb_hours_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.lock_clock,
-                    ),
-                    const SizedBox(height: 20,),
 
                    Center( 
                     child: Row(

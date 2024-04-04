@@ -38,24 +38,34 @@ class _ProfileViewState extends State<ProfileView> {
     {"image": "assets/p_setting.png", "name": "Setting", "tag": "7"},
   ];
 
-String calculateAge(DateTime? birthDate) {
-  if (birthDate == null) return "Unknown";
-  
-  DateTime currentDate = DateTime.now();
-  int age = currentDate.year - birthDate.year;
-  
-  if (currentDate.month < birthDate.month || (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
-    age--;
+  String calculateAge(DateTime? birthDate) {
+    if (birthDate == null) return "Unknown";
+
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+
+    if (currentDate.month < birthDate.month || (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
+      age--;
+    }
+
+    return age >= 0 ? age.toString() : "Unknown";
   }
 
-  return age >= 0 ? age.toString() : "Unknown";
-}
-
+  String getProfileImage(String? gender) {
+    if (gender == 'male') {
+      return "assets/avatar.png";
+    } else if (gender == 'female') {
+      return "assets/u2.png";
+    } else {
+      return "assets/user_text.png";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     var cachedUser = Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser;
-String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dateOfBirth ?? '') : null);
+    String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dateOfBirth ?? '') : null);
+    String profileImage = getProfileImage(cachedUser != null ? cachedUser.gender : null);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +75,10 @@ String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dat
         leadingWidth: 0,
         title: Text(
           "Profile",
-          style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+          style: TextStyle(
+            color: TColor.black, 
+            fontSize: 16, 
+            fontWeight: FontWeight.w700),
         ),
         actions: [
           InkWell(
@@ -112,7 +125,7 @@ String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dat
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
-                      "assets/u2.png",
+                      profileImage,
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
@@ -134,7 +147,7 @@ String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dat
                           ),
                         ),
                         Text(
-                    cachedUser != null ? "${cachedUser.role} " : "",
+                          cachedUser != null ? "${cachedUser.role} " : "",
                           style: TextStyle(
                             color: TColor.gray,
                             fontSize: 12,

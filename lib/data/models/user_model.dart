@@ -99,36 +99,28 @@ const PatientRequest({
   }
 }
 class DoctorRequest {
-  final String title;
-  final String bio;
-  final String clinicHours;
-  final String address; 
-  final bool isVerified;
-  final String verificationDocument;
-  final String specialization;
-  final String licenseNumber;
+final String firstName ;
+final String lastName ;
+final String email;
+final String password;
+final String phone;
 
   const DoctorRequest({
-    required this.title,
-    required this.bio,
-    required this.clinicHours,
-    required this.address,
-    required this.isVerified,
-    required this.verificationDocument,
-    required this.specialization,
-    required this.licenseNumber,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.password,
+    required this.phone,
+   
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'title': title,
-      'bio': bio,
-      'clinicHours': clinicHours,
-      'address': address,
-      'isVerified': isVerified,
-      'verificationDocument': verificationDocument,
-      'specialization': specialization,
-      'licenseNumber': licenseNumber,
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'password': password,
+      'phone': phone,
     };
   }
 }

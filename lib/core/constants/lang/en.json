@@ -63,7 +63,10 @@
    "verify_code" : "Please enter the code sent by email ", 
    "verify": "Verify",
    "update": "Update your profile ! ", 
-   "confirm": "Confirm"
+   "confirm": "Confirm", 
+   "google": "Sign in with Google", 
+   "phone":"Phone number",
+   "phone_error": "Please enter your phone number"
 
     
   }

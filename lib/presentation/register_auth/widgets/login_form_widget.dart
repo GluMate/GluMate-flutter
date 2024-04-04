@@ -133,7 +133,7 @@ class _LoginFormState extends State<LoginForm> {
                         ],
                       ),
                       SizedBox(height: 20),
-                      Row(
+                      Row( 
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
@@ -141,20 +141,21 @@ class _LoginFormState extends State<LoginForm> {
                               signInWithGoogle();
                             },
                             child: Image.asset(
-                              'assets/google_png.png',
+                              'assets/Google.png',
                               width: 30,
                               height: 30,
                             ),
                           ),
-                          SizedBox(width: 50),
-                          IconButton(
-                            icon: Icon(
-                              Icons.facebook,
-                              size: 35,
-                              color: Colors.blue,
+                          SizedBox(width: 15),
+                            Text(
+                            AppLocalization.of(context).translate('google')!,
+                            style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 76, 139, 175),
                             ),
-                            onPressed: () {},
-                          ),
+                            ),
+                            SizedBox(width: 20),
                         ],
                       ),
                       SizedBox(height: 5),

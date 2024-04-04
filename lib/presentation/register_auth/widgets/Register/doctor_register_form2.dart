@@ -3,8 +3,7 @@ import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
 
 class RegisterDoctorForm2 extends StatefulWidget {
-  final TextEditingController controllerBio;
-  final TextEditingController controllerDiploma;
+
   final TextEditingController controllerPassword;
   final TextEditingController controllerConfirmPassword;
   final VoidCallback? onFinish;
@@ -12,10 +11,8 @@ class RegisterDoctorForm2 extends StatefulWidget {
 
   RegisterDoctorForm2({
     Key? key,
-    required this.controllerBio,
     required this.controllerPassword,
     required this.controllerConfirmPassword,
-    required this.controllerDiploma,
     this.onFinish,
     this.onBack,
   }) : super(key: key);
@@ -28,10 +25,8 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
   String? password;
 
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _controllerBio = TextEditingController();
   final TextEditingController _controllerpassword = TextEditingController();
   final TextEditingController _controllerpasswordconfirm = TextEditingController();
-  final TextEditingController _controllerDiploma = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,43 +47,9 @@ class _RegisterDoctorForm2State extends State<RegisterDoctorForm2> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('specialization')!,
-                      controller: widget.controllerBio,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('specialization_empty')!;
-                        } else {
-                          if (value.length<6) {
-                            return AppLocalization.of(context)
-                                .translate('specialization_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.description,
-                    ),
+                     
                     const SizedBox(height: 20),
-                     CustomTextFormField(
-                      label: AppLocalization.of(context)
-                          .translate('specialization')!,
-                      controller: widget.controllerDiploma,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalization.of(context)
-                              .translate('specialization_empty')!;
-                        } else {
-                          if (value.length<6) {
-                            return AppLocalization.of(context)
-                                .translate('specialization_error')!;
-                          }
-                        }
-                        return null;
-                      },
-                      icon: Icons.school,
-                    ),
+                     
                     CustomTextFormField(
   label: AppLocalization.of(context).translate('password')!,
   controller: widget.controllerPassword,
@@ -134,7 +95,7 @@ CustomTextFormField(
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(218, 91, 169, 233),
-                            minimumSize: Size(150, 50), // Adjust size
+                            minimumSize: Size(150, 50), 
                           ),
                           onPressed: () {
                             widget.onBack!();

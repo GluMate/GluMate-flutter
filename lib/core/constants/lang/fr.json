@@ -61,8 +61,13 @@
     "verify_code" : "Veuillez entrer le code envoyé par e-mail",
     "verify": "Verifier",
     "update": "Changer votre profil ! ",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "google": "Continuer avec Google",
+    "phone":"Numéro de téléphone",
+    "phone_error": "Veuillez entrer votre numéro de téléphone"
 
+    
+    
 
 
 

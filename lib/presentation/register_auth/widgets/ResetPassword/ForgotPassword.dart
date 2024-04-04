@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glumate_flutter/core/errors/failure.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
@@ -70,13 +71,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         CustomStyledButton(
                           () async {
                             if (_formKey.currentState!.validate()) {
-                              await registerProvider.sendActivationCode(email: widget.controllerEmail.text);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ValidationNumberScreen(),
-                                ),
-                              );
+                              try {
+                                await registerProvider.sendActivationCode(email: widget.controllerEmail.text);
+                                // Assuming no exception means activation code sent successfully
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ValidationNumberScreen(),
+                                  ),
+                                );
+                              } catch (error) {
+                                // Handle any errors here
+                                if (error is ServerFailure) {
+                                  showErrorMessage(error.errorMessage);
+                                } else if (error is NetworkFailure) {
+                                  showErrorMessage(error.errorMessage);
+                                } else if (error is AppFailure) {
+                                  showErrorMessage(error.errorMessage);
+                                } else {
+                                  print(error);
+                                }
+                              }
                             }
                           },
                           AppLocalization.of(context).translate('envoyer')!,
@@ -117,6 +132,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
         ),
       ),
+    );
+  }
+
+  void showErrorMessage(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

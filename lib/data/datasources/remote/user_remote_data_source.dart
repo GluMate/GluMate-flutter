@@ -10,6 +10,7 @@ import 'package:glumate_flutter/data/models/user_model.dart';
 
 abstract class UserRemoteDataSource {
   Future<void> patientRegister({required PatientRequest body });
+  Future<void> doctorRegister({required DoctorRequest body });
   Future<UserModel> getUser({required String uid});
   Future<UserModel> updateUser({required Map<String, dynamic> updateData});
   Future<Either<Failure, String>> sendActivationCode({required String email}); // New method
@@ -48,6 +49,7 @@ catch (e){
 }
 
   }
+  
 @override
 Future<UserModel> updateUser({required Map<String, dynamic> updateData}) async {
   String updateUserURL = "${AppConfig.baseUrl}user/updateProfile";
@@ -118,4 +120,22 @@ Future<UserModel> getUser({required String uid}) async {
       return Left(ServerFailure());
     }
   }
+  
+  @override
+  Future<void> doctorRegister({required DoctorRequest body}) async {
+   const doctorRegisterURL = "${AppConfig.baseUrl}provider/providerRegister" ;
+try {
+await dio.post ( doctorRegisterURL , data: body.toJson());
+
+} on DioException catch (e){
+
+
+  if (e.response != null && e.response!.statusCode == 400) {
+      print('Email already exists: ${e.response!.statusCode}');
+      throw EmailExistsFailure();
+    } else {
+      print('Error registering provider: ${e.message}');
+      throw ServerFailure(); 
+    }
 }
+}}
