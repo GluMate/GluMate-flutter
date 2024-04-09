@@ -110,7 +110,7 @@ class _MainTabViewState extends State<MainTabView> {
                 isActive: selectTab == 3,
                 onTap: () {
                   selectTab = 3;
-                  currentTab = const ProfileView();
+                 currentTab = ProfileView(context: context);
                   if (mounted) {
                     setState(() {});
                   }

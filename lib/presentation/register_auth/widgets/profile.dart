@@ -7,10 +7,14 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/Design/Round_
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/title_subtitle.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/SettingRow.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Register/role_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/contactUs.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({Key? key}) : super(key: key);
+    final BuildContext context;
+
+  const ProfileView({Key? key, required this.context}) : super(key: key);
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
@@ -26,17 +30,23 @@ class _ProfileViewState extends State<ProfileView> {
   bool positive = false;
 
   List accountArr = [
-    {"image": "assets/p_personal.png", "name": "Personal Data", "tag": "1"},
-    {"image": "assets/p_achi.png", "name": "Achievement", "tag": "2"},
-    {"image": "assets/p_activity.png", "name": "Activity History", "tag": "3"},
-    {"image": "assets/p_workout.png", "name": "Workout Progress", "tag": "4"}
+    {"image": "assets/p_personal.png", "name": "Personal Data", "tag": "1", "route": EditProfilePage()},
+    {"image": "assets/p_achi.png", "name": "Achievement", "tag": "2", "route": roleWidget()},
+    {"image": "assets/p_workout.png", "name": "Activity History", "tag": "3", "route": null},
   ];
 
-  List otherArr = [
-    {"image": "assets/p_contact.png", "name": "Contact Us", "tag": "5"},
-    {"image": "assets/p_privacy.png", "name": "Privacy Policy", "tag": "6"},
-    {"image": "assets/p_setting.png", "name": "Setting", "tag": "7"},
-  ];
+ List otherArr(BuildContext context) => [
+  {"image": "assets/p_contact.png", "name": "Contact Us", "tag": "5", "route": ContactUsScreen()},
+  {
+    "image": "assets/p_privacy.png",
+    "name": "Privacy Policy",
+    "tag": "6",
+    "onTap": () {
+      _showPrivacyDialog(context);
+    },
+  },
+];
+
 
   String calculateAge(DateTime? birthDate) {
     if (birthDate == null) return "Unknown";
@@ -76,9 +86,10 @@ class _ProfileViewState extends State<ProfileView> {
         title: Text(
           "Profile",
           style: TextStyle(
-            color: TColor.black, 
-            fontSize: 16, 
-            fontWeight: FontWeight.w700),
+            color: TColor.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         actions: [
           InkWell(
@@ -210,45 +221,77 @@ class _ProfileViewState extends State<ProfileView> {
               const SizedBox(
                 height: 25,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
+              GestureDetector(
+                onTap: () {
+                  /*  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BluetoothDevicesView()),
+                  );*/
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
                     color: TColor.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Account",
-                      style: TextStyle(
-                        color: TColor.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Account",
+                        style: TextStyle(
+                          color: TColor.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: accountArr.length,
-                      itemBuilder: (context, index) {
-                        var iObj = accountArr[index] as Map? ?? {};
-                        return SettingRow(
-                          icon: iObj["image"].toString(),
-                          title: iObj["name"].toString(),
-                          onPressed: () {},
-                        );
-                      },
-                    )
-                  ],
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      for (var item in accountArr)
+                        SizedBox(
+                          height: 30,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => item["route"],
+                                ),
+                              );
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  item["image"],
+                                  height: 15,
+                                  width: 15,
+                                  fit: BoxFit.contain,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    item["name"],
+                                    style: TextStyle(
+                                      color: TColor.black,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              SizedBox(height: 25,),
               GestureDetector(
                 onTap: () {
                   /*  Navigator.push(
@@ -311,47 +354,125 @@ class _ProfileViewState extends State<ProfileView> {
               const SizedBox(
                 height: 25,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
+              GestureDetector(
+                onTap: () {
+                  /*  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BluetoothDevicesView()),
+                  );*/
+                },
+                child:
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
                     color: TColor.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Other",
-                      style: TextStyle(
-                        color: TColor.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Other",
+                        style: TextStyle(
+                          color: TColor.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemCount: otherArr.length,
-                      itemBuilder: (context, index) {
-                        var iObj = otherArr[index] as Map? ?? {};
-                        return SettingRow(
-                          icon: iObj["image"].toString(),
-                          title: iObj["name"].toString(),
-                          onPressed: () {},
-                        );
-                      },
-                    )
-                  ],
+                      const SizedBox(
+                        height: 8,
+                      ),
+
+                      for (var item in otherArr(context))
+                        SizedBox(
+                          height: 30,
+                          child: GestureDetector(
+                            onTap: () {
+                              if (item['name'] == 'Privacy Policy') {
+                                item['onTap']();
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => item["route"],
+                                  ),
+                                );
+                              }
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  item["image"],
+                                  height: 15,
+                                  width: 15,
+                                  fit: BoxFit.contain,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    item["name"],
+                                    style: TextStyle(
+                                      color: TColor.black,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showPrivacyDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Privacy Policy'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Your privacy is important to us.',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8.0),
+                Text(
+                  'We collect minimal user data necessary for the functioning of our app. This may include basic analytics data such as device type, screen resolution, and usage statistics. We do not collect any personally identifiable information unless explicitly provided by the user for specific features.',
+                ),
+                SizedBox(height: 16.0),
+                Text(
+                  'By using our app, you agree to our Privacy Policy.',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
