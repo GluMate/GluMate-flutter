@@ -8,7 +8,7 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/title_subtitle.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/SettingRow.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Register/role_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/contactUs.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Profile/contactUs.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatefulWidget {

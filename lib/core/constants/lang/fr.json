@@ -54,9 +54,9 @@
     "forgot_password": "Mot de passe oublié ?",
     "reset": "Réinitialiser votre mot de passe",
     "envoyer": "Envoyer",
-    "please_enter_email": "Veuillez entrer votre adresse e-mail, un code de vérification vous sera envoyé !", 
+    "please_enter_email": "Veuillez entrer votre adresse e-mail, un lien de réinitialisation de mot de passe vous sera envoyé !", 
     "not_verified": "Vous n\"avez pas reçu de code de vérification?", 
-    "resend": "Réenvoyer le code", 
+    "resend": "Réenvoyer le mail", 
     "update_password": "Maintenant, vous pouvez changer votre mot de passe !",
     "verify_code" : "Veuillez entrer le code envoyé par e-mail",
     "verify": "Verifier",
@@ -64,7 +64,12 @@
     "confirm": "Confirmer",
     "google": "Continuer avec Google",
     "phone":"Numéro de téléphone",
-    "phone_error": "Veuillez entrer votre numéro de téléphone"
+    "phone_error": "Veuillez entrer votre numéro de téléphone",
+    "done": "Envoyé",
+    "pass_sent": "Email de réinitialisation du mot de passe envoyé!",
+    "pass_desc": "La sécurité de votre compte est notre priorité. Nous vous avons envoyé un lien sécurisé pour changer votre mot de passe en toute sécurité et protéger votre compte."
+
+
 
     
     

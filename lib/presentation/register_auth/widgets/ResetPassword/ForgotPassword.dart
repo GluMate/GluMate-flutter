@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/core/errors/failure.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/ValidationNumber.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/Auth.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/DoneScreen.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -20,91 +20,84 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false; 
 
   @override
   Widget build(BuildContext context) {
     return Consumer<RegisterAuthProvider>(
       builder: (context, registerProvider, _) {
-        return Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 60,
-                left: 28,
-                right: 28,
-              ),
-              child: Column(
-                children: [
-                  Image.asset(
-                    "assets/msg1.gif",
-                    height: 300,
-                    width: 500,
-                  ),
-                  SizedBox(height: 40),
-                  Text(
-                    AppLocalization.of(context).translate('please_enter_email')!,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 25,),
-                  CustomTextFormField(
-                    label: AppLocalization.of(context).translate('email')!,
-                    controller: widget.controllerEmail,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppLocalization.of(context).translate('email_empty')!;
-                      } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                        return AppLocalization.of(context).translate('email_error')!;
-                      }
-                      return null;
-                    },
-                    icon: Icons.email,
-                  ),
-                  const SizedBox(height: 25),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomStyledButton(
-                          () async {
-                            if (_formKey.currentState!.validate()) {
-                              try {
-                                await registerProvider.sendActivationCode(email: widget.controllerEmail.text);
-                                // Assuming no exception means activation code sent successfully
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ValidationNumberScreen(),
-                                  ),
-                                );
-                              } catch (error) {
-                                // Handle any errors here
-                                if (error is ServerFailure) {
-                                  showErrorMessage(error.errorMessage);
-                                } else if (error is NetworkFailure) {
-                                  showErrorMessage(error.errorMessage);
-                                } else if (error is AppFailure) {
-                                  showErrorMessage(error.errorMessage);
-                                } else {
-                                  print(error);
-                                }
-                              }
-                            }
-                          },
-                          AppLocalization.of(context).translate('envoyer')!,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+        return _isLoading ? _buildLoadingScreen() : _buildForm();
       },
+    );
+  }
+
+  Widget _buildForm() {
+    return Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 60,
+            left: 28,
+            right: 28,
+          ),
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/msg1.gif",
+                height: 300,
+                width: 500,
+              ),
+              SizedBox(height: 40),
+              Text(
+                AppLocalization.of(context).translate('please_enter_email')!,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 25,),
+              CustomTextFormField(
+                label: AppLocalization.of(context).translate('email')!,
+                controller: widget.controllerEmail,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return AppLocalization.of(context).translate('email_empty')!;
+                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                    return AppLocalization.of(context).translate('email_error')!;
+                  }
+                  return null;
+                },
+                icon: Icons.email,
+              ),
+              const SizedBox(height: 25),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomStyledButton(
+                      () async {
+                        if (_formKey.currentState!.validate()) {
+                          _sendPasswordResetEmail();
+                        }
+                      },
+                      AppLocalization.of(context).translate('envoyer')!,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingScreen() {
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 
@@ -135,6 +128,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
+  void _sendPasswordResetEmail() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      await AuthService().sendPasswordResetEmail(widget.controllerEmail.text.trim());
+      setState(() {
+        _isLoading = false;
+      });
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DoneScreen()),
+      );
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      showErrorMessage(error.toString());
+    }
+  }
+
   void showErrorMessage(String errorMessage) {
     showDialog(
       context: context,
@@ -155,3 +169,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 }
+
+
+
