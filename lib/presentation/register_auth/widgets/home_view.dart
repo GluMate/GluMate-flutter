@@ -2,6 +2,7 @@
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/Round_Button.dart';
@@ -112,7 +113,7 @@ return  const Center(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Welcome Back,",
+                AppLocalization.of(context).translate('welcome_back')!,
                           style: TextStyle(color: TColor.gray, fontSize: 12),
                         ),
                         Text(

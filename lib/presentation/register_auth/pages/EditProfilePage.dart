@@ -3,7 +3,7 @@ import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/pages/login_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/EditProfile.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Profile/EditProfile.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Register/patient_register_form1.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Register/patient_register_form2_widget.dart';
 import 'package:provider/provider.dart';

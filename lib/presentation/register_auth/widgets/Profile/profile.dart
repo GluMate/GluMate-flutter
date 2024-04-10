@@ -36,10 +36,10 @@ class _ProfileViewState extends State<ProfileView> {
   ];
 
  List otherArr(BuildContext context) => [
-  {"image": "assets/p_contact.png", "name": "Contact Us", "tag": "5", "route": ContactUsScreen()},
+  {"image": "assets/p_contact.png", "name":AppLocalization.of(context).translate('contact')!, "tag": "5", "route": ContactUsScreen()},
   {
     "image": "assets/p_privacy.png",
-    "name": "Privacy Policy",
+    "name": AppLocalization.of(context).translate('privacy')!,
     "tag": "6",
     "onTap": () {
       _showPrivacyDialog(context);
@@ -49,7 +49,8 @@ class _ProfileViewState extends State<ProfileView> {
 
 
   String calculateAge(DateTime? birthDate) {
-    if (birthDate == null) return "Unknown";
+    if (birthDate == null) return 
+    AppLocalization.of(context).translate('unknown')!;
 
     DateTime currentDate = DateTime.now();
     int age = currentDate.year - birthDate.year;
@@ -58,7 +59,8 @@ class _ProfileViewState extends State<ProfileView> {
       age--;
     }
 
-    return age >= 0 ? age.toString() : "Unknown";
+    return age >= 0 ? age.toString() :AppLocalization.of(context).translate('unknown')!;
+;
   }
 
   String getProfileImage(String? gender) {
@@ -168,10 +170,10 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   SizedBox(
-                    width: 70,
+                    width: 79,
                     height: 25,
                     child: RoundButton(
-                      title: "Edit",
+                      title: AppLocalization.of(context).translate('edit')!,
                       type: RoundButtonType.bgGradient,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -240,7 +242,7 @@ class _ProfileViewState extends State<ProfileView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Account",
+                      AppLocalization.of(context).translate('compte')!,
                         style: TextStyle(
                           color: TColor.black,
                           fontSize: 16,
@@ -374,8 +376,8 @@ class _ProfileViewState extends State<ProfileView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Other",
-                        style: TextStyle(
+                          AppLocalization.of(context).translate('other')!,                
+                          style: TextStyle(
                           color: TColor.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -390,7 +392,8 @@ class _ProfileViewState extends State<ProfileView> {
                           height: 30,
                           child: GestureDetector(
                             onTap: () {
-                              if (item['name'] == 'Privacy Policy') {
+                              if (item['name'] == AppLocalization.of(context).translate('privacy')!               
+) {
                                 item['onTap']();
                               } else {
                                 Navigator.push(
@@ -442,23 +445,29 @@ class _ProfileViewState extends State<ProfileView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Privacy Policy'),
+          title: Text(AppLocalization.of(context).translate('privacy')!,                
+),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Your privacy is important to us.',
+                  AppLocalization.of(context).translate('privacy_importance')!,
                   style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 8.0),
                 Text(
-                  'We collect minimal user data necessary for the functioning of our app. This may include basic analytics data such as device type, screen resolution, and usage statistics. We do not collect any personally identifiable information unless explicitly provided by the user for specific features.',
+                    AppLocalization.of(context).translate('collect')!,
+                      textAlign: TextAlign.justify,
+
                 ),
                 SizedBox(height: 16.0),
                 Text(
-                  'By using our app, you agree to our Privacy Policy.',
+                AppLocalization.of(context).translate('agree')!,
                   style: TextStyle(fontStyle: FontStyle.italic),
+                  textAlign: TextAlign.justify,
+
                 ),
               ],
             ),
@@ -468,7 +477,9 @@ class _ProfileViewState extends State<ProfileView> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Close'),
+              child: Text(               
+                 AppLocalization.of(context).translate('close')!,
+                ),
             ),
           ],
         );

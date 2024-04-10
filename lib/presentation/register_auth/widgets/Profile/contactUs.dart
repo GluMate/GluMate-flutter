@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 
 class ContactUsScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class ContactUsScreen extends StatelessWidget {
         elevation: 0,
         leadingWidth: 0,
         title: Text(
-          "Contact Us",
+         AppLocalization.of(context).translate('contact')!,
           style: TextStyle(
             color: TColor.black,
             fontSize: 20,
@@ -35,7 +36,7 @@ class ContactUsScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'For more information, contact us at:',
+              AppLocalization.of(context).translate('info')!,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
