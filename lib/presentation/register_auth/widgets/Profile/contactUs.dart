@@ -9,12 +9,13 @@ class ContactUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: TColor.white,
         centerTitle: true,
         elevation: 0,
         leadingWidth: 0,
         title: Text(
-         AppLocalization.of(context).translate('contact')!,
+          AppLocalization.of(context).translate('contact')!,
           style: TextStyle(
             color: TColor.black,
             fontSize: 20,
@@ -24,10 +25,11 @@ class ContactUsScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start, // Align content at the top
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(top: 90), // Adjusted padding here
               child: Image.asset(
                 "assets/contact.png",
                 fit: BoxFit.contain,
@@ -35,6 +37,7 @@ class ContactUsScreen extends StatelessWidget {
                 height: 250,
               ),
             ),
+            SizedBox(height: 20), // Added SizedBox for spacing
             Text(
               AppLocalization.of(context).translate('info')!,
               style: TextStyle(
@@ -50,7 +53,7 @@ class ContactUsScreen extends StatelessWidget {
                 phone: '+21655668192',
                 link: 'www.GluMate.com',
                 iconColor: Color.fromARGB(255, 161, 203, 237),
-                textColor:Color.fromARGB(255, 44, 106, 154),
+                textColor: Color.fromARGB(255, 44, 106, 154),
               ),
             ),
           ],
@@ -115,7 +118,7 @@ class ContactInfoRow extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: textColor, // Apply text color
+              color: textColor, 
             ),
           ),
         ],

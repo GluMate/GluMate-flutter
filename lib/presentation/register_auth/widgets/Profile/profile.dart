@@ -84,6 +84,8 @@ class _ProfileViewState extends State<ProfileView> {
         backgroundColor: TColor.white,
         centerTitle: true,
         elevation: 0,
+       automaticallyImplyLeading: false,
+
         leadingWidth: 0,
         title: Text(
           "Profile",
