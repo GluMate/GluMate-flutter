@@ -136,43 +136,7 @@ print("how");
      
   }
   
- @override
-Future<Either<Failure, UserEntity>> updateUser({required Map<String, dynamic> updateData}) async {
-  if (await networkInfo.isConnected!) {
-    try {
-      final remoteUser = await userRemoteDataSource.updateUser(updateData: updateData, );
-      
-      localDataSource.cacheUser(remoteUser);
-      
-      return Right(remoteUser);
-    } on ServerFailure {
-      return Left(ServerFailure());
-    } on CacheException {
-      return Left(CacheFailure(errorMessage: "cache error"));
-    } catch (_) {
-      return Left(AppFailure());
-    }
-  } else {
-    return Left(NetworkFailure());
-  }
-}
-
- @override
-Future<Either<Failure, String>> sendActivationCode({required String email}) async {
-  if (await networkInfo.isConnected!) {
-    try {
-      await userRemoteDataSource.sendActivationCode(email: email);
-      return Right('Activation code sent successfully');
-    } on ServerFailure {
-      return Left(ServerFailure());
-    } on AppFailure {
-      return Left(AppFailure());
-    }
-  } else {
-    return Left(NetworkFailure());
-  }
-}
-
+ 
   @override
   Future<void> doctorRegister({required DoctorRequest body}) async{
     if (await networkInfo.isConnected!){
@@ -197,5 +161,24 @@ Future<Either<Failure, String>> sendActivationCode({required String email}) asyn
 
   }
   }
+  
+  @override
+Future<Either<Failure, UserEntity>> updateUser({required String userId, required Map<String, dynamic> updateUserFields}) async {
+  if (await networkInfo.isConnected!) {
+    try {
+      await userRemoteDataSource.updateUser(userId: userId, updateUserFields: updateUserFields);
+    } on EmailExistsFailure {
+      throw EmailExistsFailure();
+    } on ServerFailure {
+      throw ServerFailure();
+    } on AppFailure {
+      throw AppFailure();
+    }
+  } else {
+    throw NetworkFailure();
+  }
+  
+  throw AppFailure();
+}
 
 }

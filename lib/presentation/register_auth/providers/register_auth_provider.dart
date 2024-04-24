@@ -200,23 +200,6 @@ Future<void> eitherFailureOrRegisterCareProvider({
       setLogoutErrorMessage(AppFailure().errorMessage);
     }
   }
-Future<void> updateUser(Map<String, dynamic> updateData) async {
-  UserRepositoryImpl repository = UserRepositoryImpl(
-    userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
-    networkInfo: NetworkInfoImpl(DataConnectionChecker()),
-    localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
-  );
-
-  try {
-    await repository.updateUser(updateData: updateData);
-  } on NetworkFailure {
-    print("network failure !!");
-  } on ServerFailure {
-    print("server failure !!");
-  } on AppFailure {
-    print("app failure !!");
-  }
-}
 
   Future<Either<Failure, UserEntity>> eitherFailureOrConnectedUser() async {
   UserRepositoryImpl repository = UserRepositoryImpl(
@@ -251,26 +234,27 @@ notifyListeners();
     },
   );
 
-  
 }
-Future<void> sendActivationCode({required String email}) async {
-  UserRepositoryImpl repository = UserRepositoryImpl(
-    userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
-    networkInfo: NetworkInfoImpl(DataConnectionChecker()),
-    localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
-  );
+  Future<void> eitherFailureOrUpdateUser({
+    required String id,
+    required Map<String, dynamic> updatedUserData,
+  }) async {
+    UserRepositoryImpl repository = UserRepositoryImpl(
+      userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
+      networkInfo: NetworkInfoImpl(DataConnectionChecker()),
+      localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance()),
+    );
 
-  try {
-    await repository.sendActivationCode(email: email);
-  } on NetworkFailure {
-    print("network failure !!");
-  } on ServerFailure {
-    print("server failure !!");
-  } on AppFailure {
-    print("app failure !!");
+    try {
+      await repository.updateUser(userId: id, updateUserFields: updatedUserData);
+    } on NetworkFailure {
+      setLoginErrorMessage(NetworkFailure().errorMessage);
+    } on ServerFailure {
+      setLoginErrorMessage(ServerFailure().errorMessage);
+    } on AppFailure {
+      setLoginErrorMessage(AppFailure().errorMessage);
+    }
   }
-}
-
 
 Future<Either<Failure, UserEntity>> eitherFailureOrConnectedCachedUser() async {
   if (_cachedUser != null) {

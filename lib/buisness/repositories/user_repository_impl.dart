@@ -13,6 +13,6 @@ abstract class UserRepository {
   Future<Either<Failure, UserEntity>> getUserByUid({required String params});
   Future<Either<Failure, UserEntity>> getCachedUser();
   Future<void> deleteCache() ;
-  Future<Either<Failure, UserEntity>> updateUser({required Map<String, dynamic> updateData});
-  Future<Either<Failure, String>> sendActivationCode({required String email});
+  Future<Either<Failure, UserEntity>> updateUser({required String userId, required Map<String, dynamic> updateUserFields});
+
 }

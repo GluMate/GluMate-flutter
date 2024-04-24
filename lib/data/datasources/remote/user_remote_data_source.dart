@@ -12,8 +12,7 @@ abstract class UserRemoteDataSource {
   Future<void> patientRegister({required PatientRequest body });
   Future<void> doctorRegister({required DoctorRequest body });
   Future<UserModel> getUser({required String uid});
-  Future<UserModel> updateUser({required Map<String, dynamic> updateData});
-  Future<Either<Failure, String>> sendActivationCode({required String email}); // New method
+  Future<void> updateUser({required String userId, required Map<String, dynamic> updateUserFields});
 
 }
 
@@ -50,33 +49,6 @@ catch (e){
 
   }
   
-@override
-Future<UserModel> updateUser({required Map<String, dynamic> updateData}) async {
-  String updateUserURL = "${AppConfig.baseUrl}user/updateProfile";
-  try {
-    final response = await dio.put(
-      updateUserURL,
-      data: updateData,
-      options: Options(
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      ),
-    );
-    return UserModel.fromJson(response.data);
-  } on DioError catch (e) {
-    if (e.response != null && e.response!.statusCode == 400) {
-      print('Invalid user ID: ${e.response!.statusCode}');
-      throw ServerFailure(); // Handle 400 error as a server failure
-    } else {
-      print('Error updating user: ${e.message}');
-      throw ServerFailure(); // Handle other errors as server failure
-    }
-  } catch (e) {
-    print(e);
-    throw ServerFailure(); // Catch any other unexpected errors as server failure
-  }
-}
 
 
 Future<UserModel> getUser({required String uid}) async {
@@ -138,4 +110,32 @@ await dio.post ( doctorRegisterURL , data: body.toJson());
       throw ServerFailure(); 
     }
 }
-}}
+}
+
+  @override
+  Future<void> updateUser({required String userId, required Map<String, dynamic> updateUserFields}) async {
+    try {
+      final updateUserURL = "${AppConfig.baseUrl}/user/$userId/update";
+      final response = await dio.put(
+        updateUserURL,
+        data: updateUserFields,
+      );
+
+      if (response.statusCode == 200) {
+      print("success"); 
+      } else {
+        throw ServerFailure();
+      }
+    } on DioError catch (e) {
+      if (e.response != null && e.response!.statusCode == 400) {
+        throw EmailExistsFailure();
+      } else {
+        throw ServerFailure();
+      }
+    } catch (e) {
+      throw AppFailure();
+    }
+  }
+}
+
+  

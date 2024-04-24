@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/GlucoseForm.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Profile/profile.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/tabButton.dart';
@@ -85,7 +86,7 @@ class _MainTabViewState extends State<MainTabView> {
                 isActive: selectTab == 1,
                 onTap: () {
                   selectTab = 1;
-                  currentTab = const MyChatUI();
+                  currentTab = GlucoseTrackingForm(controllerEmail: null);
                   if (mounted) {
                     setState(() {});
                   }

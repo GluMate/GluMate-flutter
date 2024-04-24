@@ -63,7 +63,7 @@
    "date_time" : "Date and time : ",
    "Tracker_page" : "Tracker",
 
-   
+   "please_enter_sugar_blood": "Please enter the value received from the glucometer, indicating the sugar level in your blood.",
    "forgot_password": "Forgot password ?", 
    "reset": "Reset password",
    "envoyer": "Send",
@@ -80,7 +80,8 @@
    "phone_error": "Please enter your phone number",
    "done": "Done",
    "pass_sent": "Password reset email sent!",
-   "pass_desc": "Your account security is our priority. We’ve sent you a secure link to safely change your password and keep your account protected. "
-
+   "pass_desc": "Your account security is our priority. We’ve sent you a secure link to safely change your password and keep your account protected. ",
+   "sugar": "Your blood sugar level", 
+   "sugar_empty": "Please enter your blood sugar level !"
     
   }

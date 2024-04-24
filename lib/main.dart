@@ -10,14 +10,21 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/main_tab.dart
 import 'package:glumate_flutter/widget_tree.dart';
 import 'package:provider/provider.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
   await Firebase.initializeApp();
+
+ 
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LocaleProvider()), 
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => RegisterAuthProvider()),
+           //  ChangeNotifierProvider(create: (_) => GlucoseProvider()),
       ],
       child: const MyApp(),
     ),
@@ -31,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: Provider.of<LocaleProvider>(context).locale, 
+      locale: Provider.of<LocaleProvider>(context).locale,
       supportedLocales: const [
         Locale("en", ""),
         Locale("fr", ""),
