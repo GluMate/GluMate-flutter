@@ -62,7 +62,6 @@ dependencies:
   numberpicker: ^2.1.2
   syncfusion_flutter_sliders: ^24.2.7
   google_sign_in: ^6.2.1
-  syncfusion_flutter_charts: ^24.2.9
 
 dev_dependencies:
   flutter_test:

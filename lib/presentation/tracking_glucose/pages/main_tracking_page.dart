@@ -30,7 +30,6 @@ class _MainTrackingPageState extends State<MainTrackingPage> {
     super.didChangeDependencies();
     Provider.of<GlucoseProvider>(context, listen: false).eitherFailureOrFetchRecords(
       id: Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser!.id,
-      limit: 10
     );
   }
 
@@ -45,7 +44,6 @@ class _MainTrackingPageState extends State<MainTrackingPage> {
 
         
       ),
-     
       body: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
@@ -67,7 +65,7 @@ class _MainTrackingPageState extends State<MainTrackingPage> {
                           ),
                         ).then((value) {
                          Provider.of<GlucoseProvider>(context, listen: false).eitherFailureOrFetchRecords(
-      id: Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser!.id, limit: 10
+      id: Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser!.id,
     );
                         });;
                       },

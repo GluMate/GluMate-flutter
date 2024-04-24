@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/buisness/entities/gluc_entity.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/tracking_glucose/providers/gluc_record_provider.dart';
-import 'package:glumate_flutter/presentation/tracking_glucose/widgets/gluc_color_indicator.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class recordsList extends StatefulWidget {
@@ -19,7 +17,7 @@ class _recordsListState extends State<recordsList> {
     super.initState();
         Provider.of<RegisterAuthProvider>(context, listen : false).eitherFailureOrConnectedCachedUser(); 
 
-       Provider.of<GlucoseProvider>(context, listen : false).eitherFailureOrFetchRecords(id:  Provider.of<RegisterAuthProvider>(context, listen : false).cachedUser!.id , limit: 10 ); 
+       Provider.of<GlucoseProvider>(context, listen : false).eitherFailureOrFetchRecords(id:  Provider.of<RegisterAuthProvider>(context, listen : false).cachedUser!.id  ); 
 }  
   @override
   Widget build(BuildContext context) {
@@ -60,36 +58,14 @@ class _recordTileState extends State<recordTile> {
   Widget build(BuildContext context) {
     return Consumer<GlucoseProvider>(builder: (context , glucProvider , _) {
  return ListTile(
-  leading: Container(
-    width: 40,
-    height: 40,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: getGlucColorAndIndicator(widget.item.gluc, widget.item.metaData.note,widget.item.metaData.unit).color,
-        width: 2,
+      leading: CircleAvatar(
+        backgroundColor: const Color(0xff764abc),
+        child: Text(widget.item.metaData.type),
       ),
-    ),
-    child: Center(
-      child: Text(
-        '${widget.item.gluc}',
-        style: TextStyle(color: getGlucColorAndIndicator(widget.item.gluc, widget.item.metaData.note,widget.item.metaData.unit).color),
-      ),
-    ),
-  ),
-  title: Text(
-    getGlucColorAndIndicator(widget.item.gluc, widget.item.metaData.note,widget.item.metaData.unit).indicator,
-    style: TextStyle(color: getGlucColorAndIndicator(widget.item.gluc, widget.item.metaData.note,widget.item.metaData.unit).color),
-  ),
-  subtitle:Text(
-    DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(widget.item.measured_at)),
-  ),
-  trailing: Text(
-   widget.item.metaData.type
-  ),
-);
-
-
+      title: Text('Item ${widget.item}'),
+      subtitle: Text('Item description'),
+      trailing: Icon(Icons.more_vert),
+    );
     });
    
   }

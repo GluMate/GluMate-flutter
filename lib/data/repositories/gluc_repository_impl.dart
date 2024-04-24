@@ -44,38 +44,11 @@ class GlucRepositoryImpl implements GlucRepository {
   }
 
   @override
-  Future<Either<Failure, List<GlucEntity>>> fetchRecords({required String token, required String id , required int limit}) async {
+  Future<Either<Failure, List<GlucEntity>>> fetchRecords({required String token, required String id}) async {
  if (await networkInfo.isConnected!) {
       try {
         final remoteRecords =
-            await glucRemoteDataSource.fetchRecords(token: token , id: id,limit: limit);
-
-       // localDataSource.cacheRecords(remoteRecords);
-
-        return Right(remoteRecords);
-      } on ServerFailure {
-        return Left(ServerFailure(errorMessage: 'This is a server exception'));
-      } on AppFailure {
-        return Left(AppFailure());
-      }
-    } else {
-      // try {
-      //   final localPokemon = await localDataSource.getLastPokemon();
-      //   return Right(localPokemon);
-      // } on CacheException {
-      //   return Left(CacheFailure(errorMessage: 'No local data found'));
-      // }
-      return Left(NetworkFailure());
-    }
-  }
-
-
-  @override
-  Future<Either<Failure, List<RecordEntity>>> fetchRecordsByTime({required String token, required DateTime start, required DateTime end , String? gran})  async {
-    if (await networkInfo.isConnected!) {
-      try {
-        final remoteRecords =
-            await glucRemoteDataSource.fetchRecordsByTime(token: token , start: start , end: end , gran: gran);
+            await glucRemoteDataSource.fetchRecords(token: token , id: id);
 
        // localDataSource.cacheRecords(remoteRecords);
 

@@ -15,11 +15,7 @@ class GlucRecord {
      await repository.manualRecord( token: token ,body: manuelRequest);
   }
 
-    Future<Either<Failure,List<GlucEntity>>> callFetchRecords({required String token,required String id , required int limit}) async {
-    return  await repository.fetchRecords( token: token ,id: id ,limit: limit);
-  }
-
-     Future<Either<Failure,List<RecordEntity>>> callFetchRecordsByTime({required String token,required DateTime start , required DateTime end  , String? gran }) async {
-    return  await repository.fetchRecordsByTime( token: token ,start: start, end: end , gran: gran);
+    Future<Either<Failure,List<GlucEntity>>> callFetchRecords({required String token,required String id}) async {
+    return  await repository.fetchRecords( token: token ,id: id);
   }
 }

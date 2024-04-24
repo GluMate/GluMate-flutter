@@ -78,6 +78,8 @@ bool _isEnabled = false;
     });
   }
   });
+  print(_isEnabled);
+  print(_isVisible);
   }
   @override
   Widget build(BuildContext context) {
