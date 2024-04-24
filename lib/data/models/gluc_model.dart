@@ -1,19 +1,22 @@
 
 
+
 import 'package:glumate_flutter/buisness/entities/gluc_entity.dart';
-import 'package:intl/intl.dart';
+
 
 class GlucModel  extends GlucEntity{
   const GlucModel({
     required String id,
     required String measured_at,
      required num gluc,
-  required metaDataModel metaData
+  required metaDataModel metaData,
+  String? date
   }) : super(
           id: id,
           measured_at: measured_at,
           gluc: gluc,
-          metaData: metaData
+          metaData: metaData,
+          date: date
         );
 
   factory GlucModel.fromJson(Map<String, dynamic> json) {
@@ -21,6 +24,7 @@ class GlucModel  extends GlucEntity{
     return GlucModel(
       id: json['_id'],
       measured_at: json['measured_at'],
+      date: json['date'],
       gluc: (json['gluc'] as num).toDouble(),
 metaData: metaDataModel.fromJson(json['metadata'])      
     );
@@ -36,7 +40,23 @@ metaData: metaDataModel.fromJson(json['metadata'])
 
 }
 
+class RecordModel extends RecordEntity {
+  const RecordModel({
+    required String date,
+    required num gluc
+  }) : super(
+    date:date,
+    gluc: gluc
+  ) ;
 
+  factory RecordModel.fromJson(Map<String, dynamic> json) {
+       final V = json['__v'];
+    return RecordModel(
+      date: json['date'],
+      gluc: (json['gluc'] as num).toDouble(),   
+    );
+  }
+}
 class ManuelRequest {
 final  String measured_at ;
 final num gluc ;

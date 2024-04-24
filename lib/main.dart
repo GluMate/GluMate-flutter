@@ -6,6 +6,7 @@ import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/Locale_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/main_tab.dart';
+import 'package:glumate_flutter/presentation/tracking_glucose/providers/gluc_charts_provider.dart';
 import 'package:glumate_flutter/presentation/tracking_glucose/providers/gluc_record_provider.dart';
 
 import 'package:glumate_flutter/widget_tree.dart';
@@ -31,6 +32,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => RegisterAuthProvider()),
              ChangeNotifierProvider(create: (_) => GlucoseProvider()),
+               ChangeNotifierProvider(create: (_) => ChartsProvider()),
       ],
       child: const MyApp(),
     ),

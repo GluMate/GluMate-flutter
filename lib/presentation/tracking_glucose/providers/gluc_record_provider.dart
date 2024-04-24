@@ -303,7 +303,7 @@ setManualRecordErrorMessage("");
   }
 
 
-Future<void> eitherFailureOrFetchRecords({required String id}) async {
+Future<void> eitherFailureOrFetchRecords({required String id , required int limit}) async {
   GlucRepositoryImpl repository = GlucRepositoryImpl(
       glucRemoteDataSource: GlucRemoteDataSourceImpl(dio: Dio()),
       networkInfo: NetworkInfoImpl(DataConnectionChecker()),
@@ -315,7 +315,8 @@ _isLoading = true;
       String? token = await Auth().currentUser?.getIdToken();
    final records=  await GlucRecord(repository).callFetchRecords(
         token: token!,
-        id: id
+        id: id,
+        limit: limit
       );
     return records.fold(
       (newFailure) {
