@@ -3,6 +3,7 @@ import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/buisness/entities/user_entity.dart';
+import 'package:glumate_flutter/buisness/repositories/user_repository_impl.dart';
 import 'package:glumate_flutter/buisness/usecases/doctor_register.dart';
 import 'package:glumate_flutter/buisness/usecases/patient_register.dart';
 import 'package:glumate_flutter/buisness/usecases/user_login.dart';
@@ -112,77 +113,77 @@ setRegisterErrorMessage("");
     }
   }
 // register provider 
-// Future<void> eitherFailureOrRegisterCareProvider({
-//     required TextEditingController firstName,
-//     required TextEditingController lastName,
-//     required TextEditingController email,
-//     required TextEditingController password,
-//     required TextEditingController phone,
-//   }) async {
-//     UserRepositoryImpl repository = UserRepositoryImpl(
-//       userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
-//       networkInfo: NetworkInfoImpl(DataConnectionChecker()),
-//          localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
+Future<void> eitherFailureOrRegisterCareProvider({
+    required TextEditingController firstName,
+    required TextEditingController lastName,
+    required TextEditingController email,
+    required TextEditingController password,
+    required TextEditingController phone,
+  }) async {
+    UserRepositoryImpl repository = UserRepositoryImpl(
+      userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
+      networkInfo: NetworkInfoImpl(DataConnectionChecker()),
+         localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
 
-//     );
+    );
 
-//     try {
-//       await DoctorRegister(repository).callDoctorRegister(
-//         doctorRegisterRequest: DoctorRequest(
-//           firstName: firstName.text,
-//           email: email.text,
-//           lastName: lastName.text,
-//           password: password.text,
-//           phone: phone.text , 
-//         ),
-//       );
-//     } on EmailExistsFailure {
-//       setRegisterErrorMessage(EmailExistsFailure().errorMessage);
-//     } on NetworkFailure {
-//       setRegisterErrorMessage(NetworkFailure().errorMessage);
-//     } on ServerFailure {
-//       setRegisterErrorMessage(ServerFailure().errorMessage);
-//     } on AppFailure {
-//       setRegisterErrorMessage(AppFailure().errorMessage);
-//     }
-//   }
-//   Future<Either<Failure, UserEntity>> eitherFailureOrLogin({
-//     required TextEditingController email,
-//     required TextEditingController passsword,
-//   }) async {
-//     UserRepositoryImpl repository = UserRepositoryImpl(
-//       userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
-//       networkInfo: NetworkInfoImpl(DataConnectionChecker()),
-//             localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
+    try {
+      await DoctorRegister(repository as UserRepository).callDoctorRegister(
+        doctorRegisterRequest: DoctorRequest(
+          firstName: firstName.text,
+          email: email.text,
+          lastName: lastName.text,
+          password: password.text,
+          phone: phone.text , 
+        ),
+      );
+    } on EmailExistsFailure {
+      setRegisterErrorMessage(EmailExistsFailure().errorMessage);
+    } on NetworkFailure {
+      setRegisterErrorMessage(NetworkFailure().errorMessage);
+    } on ServerFailure {
+      setRegisterErrorMessage(ServerFailure().errorMessage);
+    } on AppFailure {
+      setRegisterErrorMessage(AppFailure().errorMessage);
+    }
+  }
+  Future<Either<Failure, UserEntity>> eitherFailureOrLogin({
+    required TextEditingController email,
+    required TextEditingController passsword,
+  }) async {
+    UserRepositoryImpl repository = UserRepositoryImpl(
+      userRemoteDataSource: UserRemoteDataSourceImpl(dio: Dio()),
+      networkInfo: NetworkInfoImpl(DataConnectionChecker()),
+            localDataSource: UserLocalDataSourceImpl(sharedPreferences: await SharedPreferences.getInstance())
 
-//     );
-//     setLoginErrorMessage("");
-//      final connectedUser =  await UserLogin(repository).callUserLogin(
-//         userLoginRequest: UserLoginRequest(
-//           email: email.text,
-//           password: passsword.text,
-//         ),
-//       );
-//        return connectedUser.fold(
-//     (newFailure) {
-//       user = null;
-//       failure = newFailure;
-//       _isLoading = false;
-//      print(newFailure.errorMessage);
-//         setLoginErrorMessage(newFailure.errorMessage);
-//       notifyListeners();
-//       return Left(newFailure);
-//     },
-//     (newUser) {
-//       user = newUser;
-//       failure = null;
-//       _isLoading = false;
-//      notifyListeners();
-//       return Right(newUser);
-//     },
-//   );
+    );
+    setLoginErrorMessage("");
+     final connectedUser =  await UserLogin(repository).callUserLogin(
+        userLoginRequest: UserLoginRequest(
+          email: email.text,
+          password: passsword.text,
+        ),
+      );
+       return connectedUser.fold(
+    (newFailure) {
+      user = null;
+      failure = newFailure;
+      _isLoading = false;
+     print(newFailure.errorMessage);
+        setLoginErrorMessage(newFailure.errorMessage);
+      notifyListeners();
+      return Left(newFailure);
+    },
+    (newUser) {
+      user = newUser;
+      failure = null;
+      _isLoading = false;
+     notifyListeners();
+      return Right(newUser);
+    },
+  );
   
-//   }
+  }
 
   Future<void> eitherFailureOrLogout() async {
     UserRepositoryImpl repository = UserRepositoryImpl(

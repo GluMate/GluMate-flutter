@@ -151,7 +151,7 @@ class _LoginFormState extends State<LoginForm> {
                                 signInWithGoogle();
                               },
                               child: Image.asset(
-                                'assets/Google.png',
+                                'assets/google.png',
                                 width: 25,
                                 height: 30,
                               ),
