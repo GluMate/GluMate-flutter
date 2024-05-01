@@ -113,7 +113,7 @@ class _RegisterForm2State extends State<RegisterForm2> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(218, 91, 169, 233),
-                            minimumSize: Size(150, 50),
+                            minimumSize: Size(150, 50), 
                           ),
                           onPressed: () {
                             widget.onBack!();
@@ -128,7 +128,7 @@ class _RegisterForm2State extends State<RegisterForm2> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(218, 91, 169, 233),
-                            minimumSize: Size(150, 50),
+                            minimumSize: Size(150, 50), 
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

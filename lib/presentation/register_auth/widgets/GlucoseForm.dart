@@ -2,25 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/text_form_widget.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/Auth.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/ResetPassword/DoneScreen.dart';
 import 'package:provider/provider.dart';
 
-class ForgotPassword extends StatefulWidget {
-  final TextEditingController controllerEmail;
+class GlucoseTrackingForm extends StatefulWidget {
+  final TextEditingController? controllerEmail;
 
-  ForgotPassword({
+  GlucoseTrackingForm({
     Key? key,
     required this.controllerEmail,
   }) : super(key: key);
 
   @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
+  _GlucoseTrackingFormState createState() => _GlucoseTrackingFormState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+class _GlucoseTrackingFormState extends State<GlucoseTrackingForm> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false; 
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,31 +42,33 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Column(
             children: [
               Image.asset(
-                "assets/msg1.gif",
+                "assets/Diabete.gif",
                 height: 300,
                 width: 500,
               ),
               SizedBox(height: 40),
               Text(
-                AppLocalization.of(context).translate('please_enter_email')!,
+                AppLocalization.of(context).translate('please_enter_sugar_blood')!,
+                textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 25,),
-              CustomTextFormField(
-                label: AppLocalization.of(context).translate('email')!,
-                controller: widget.controllerEmail,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return AppLocalization.of(context).translate('email_empty')!;
-                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                    return AppLocalization.of(context).translate('email_error')!;
-                  }
-                  return null;
-                },
-                icon: Icons.email,
+              SizedBox(
+                width: 248, 
+                child: CustomTextFormField(
+                  label: AppLocalization.of(context).translate('sugar')!,
+                  controller: widget.controllerEmail ?? TextEditingController(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppLocalization.of(context).translate('sugar_empty')!;
+                    } 
+                    return null;
+                  },
+                  icon: Icons.bloodtype,
+                ),
               ),
               const SizedBox(height: 25),
               Center(
@@ -78,7 +78,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     CustomStyledButton(
                       () async {
                         if (_formKey.currentState!.validate()) {
-                          _sendPasswordResetEmail();
                         }
                       },
                       AppLocalization.of(context).translate('envoyer')!,
@@ -103,7 +102,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Widget CustomStyledButton(Function onPressed, String buttonText) {
     return SizedBox(
-      width: 200,
+      width: 150, 
       height: 50,
       child: ElevatedButton(
         onPressed: onPressed as void Function()?,
@@ -127,48 +126,4 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
     );
   }
-
-  void _sendPasswordResetEmail() async {
-    try {
-      setState(() {
-        _isLoading = true;
-      });
-      await AuthService().sendPasswordResetEmail(widget.controllerEmail.text.trim());
-      setState(() {
-        _isLoading = false;
-      });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => DoneScreen()),
-      );
-    } catch (error) {
-      setState(() {
-        _isLoading = false;
-      });
-      showErrorMessage(error.toString());
-    }
-  }
-
-  void showErrorMessage(String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content: Text(errorMessage),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
-
-
-

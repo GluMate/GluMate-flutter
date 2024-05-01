@@ -72,7 +72,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         SizedBox(height: 1),
                         Container(
                           height: 100,
-                          width: 200,
+                          width: 220,
                           child: Text(
                             AppLocalization.of(context)
                                 .translate('On_boarding_desc')!,

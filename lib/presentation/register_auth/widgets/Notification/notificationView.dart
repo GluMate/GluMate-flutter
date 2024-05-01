@@ -75,7 +75,6 @@ class _NotificationViewState extends State<NotificationView> {
           style: TextStyle(
               color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
-       
       ),
       backgroundColor: TColor.white,
       body: ListView.separated(

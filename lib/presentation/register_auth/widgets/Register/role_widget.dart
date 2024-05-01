@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/core/localization/appLocalization.dart';
 import 'package:glumate_flutter/presentation/register_auth/pages/register_doctor_page.dart';
 import 'package:glumate_flutter/presentation/register_auth/pages/register_patient_page.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/profile.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Profile/profile.dart';
 import 'package:provider/provider.dart';
 import '';
 import 'package:glumate_flutter/core/errors/failure.dart';
@@ -97,21 +97,20 @@ class _roleWidgetState extends State<roleWidget> {
                 CustomRoleButton("assets/doctor.png", 2,
                     AppLocalization.of(context).translate('care_provider')!),
                 SizedBox(height: 25),
-                CustomStyledButton(() {
-                  if (selectedRole == 1) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegisterPatientPage()),
-                    );
-                  } else if (selectedRole == 2) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileView()),
-                    );
-                  }
-                }, AppLocalization.of(context).translate('next')!),
+                 CustomStyledButton(() {
+                if (selectedRole == 1) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterPatientPage()),
+                  );
+                } else if (selectedRole == 2) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterDoctorPage()),
+                  );                }
+
+              }, AppLocalization.of(context).translate('next')!),
+                
               ],
             ),
           ),
@@ -119,32 +118,31 @@ class _roleWidgetState extends State<roleWidget> {
       },
     );
   }
-
-  Widget CustomStyledButton(Function onPressed, String buttonText) {
-    return SizedBox(
-      width: 250,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: onPressed as void Function()?,
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Color.fromARGB(255, 118, 183, 221),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        ),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15),
-          child: Center(
-            child: Text(
-              buttonText,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+  
+Widget CustomStyledButton(Function onPressed, String buttonText) {
+  return SizedBox(
+    width:250,
+    height: 50, 
+    child: ElevatedButton(
+      onPressed: onPressed as void Function()?,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+         backgroundColor: Color.fromARGB(255, 118, 183, 221),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15),
+        child: Center(
+          child: Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
       ),
-    );
+    )
+  );
   }
 }

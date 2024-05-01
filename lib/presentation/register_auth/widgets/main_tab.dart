@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/register_auth/providers/register_auth_provider.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/GlucoseForm.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/profile.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Profile/profile.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Design/tabButton.dart';
 import 'package:glumate_flutter/presentation/tracking_glucose/pages/main_tracking_page.dart';
 import 'package:provider/provider.dart';
@@ -124,7 +125,7 @@ class _MainTabViewState extends State<MainTabView> {
                 isActive: selectTab == 3,
                 onTap: () {
                   selectTab = 3;
-                   currentTab = const ProfileView();
+                 currentTab = ProfileView(context: context);
                   if (mounted) {
                     setState(() {});
                   }

@@ -15,6 +15,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 
 import 'package:glumate_flutter/presentation/register_auth/widgets/Notification/NotificationService.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterBlue flutterBlue = FlutterBlue.instance;
@@ -25,6 +26,7 @@ void main() async {
   // Initialize the NotificationService
   NotificationService notificationService = NotificationService();
   await notificationService.init(); // Call the init method
+ 
 
   runApp(
     MultiProvider(
@@ -33,6 +35,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => RegisterAuthProvider()),
              ChangeNotifierProvider(create: (_) => GlucoseProvider()),
                ChangeNotifierProvider(create: (_) => ChartsProvider()),
+           //  ChangeNotifierProvider(create: (_) => GlucoseProvider()),
       ],
       child: const MyApp(),
     ),

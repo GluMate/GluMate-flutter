@@ -158,61 +158,7 @@ class _registerForm1State extends State<registerForm1> {
                     child:  Text(
                       AppLocalization.of(context).translate('select_DOB')!)),
                                 const SizedBox(height: 10), 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 1,
-                              color: Color.fromARGB(235, 169, 167, 167),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              AppLocalization.of(context).translate('or')!,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 103, 162, 211),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 1,
-                              color: Color.fromARGB(235, 169, 167, 167),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                          onTap: () {
-                           },
-                          child: Image.asset(
-                         'assets/google_png.png', 
-                          width: 30,
-                          height: 30,
-      ),
-    ),                        
-                     SizedBox(width: 50),
-
-                          IconButton(
-                            icon: Icon(
-                              Icons.facebook,
-                              size: 35,
-                              color: Colors.blue,
-                            ),
-                            onPressed: () {
-                            },
-                          ),
-                          
-                        ],
-                      ),
+                     
                       SizedBox(height: 15,),
                    Center( 
                     child: Row(
@@ -238,33 +184,30 @@ class _registerForm1State extends State<registerForm1> {
       },
     );
   }
-
-  Widget CustomStyledButton(Function onPressed, String buttonText) {
-    return SizedBox(
-      width: 200,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: onPressed as void Function()?,
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Color.fromARGB(255, 118, 183, 221),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        ),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15),
-          child: Center(
-            child: Text(
-              buttonText,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+Widget CustomStyledButton(Function onPressed, String buttonText) {
+  return SizedBox(
+    width: 200,
+    height: 50,
+    child: ElevatedButton(
+      onPressed: onPressed as void Function()?,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white, backgroundColor: Color.fromARGB(255, 118, 183, 221),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15),
+        child: Center(
+          child: Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
       ),
-    );
+    )
+  );
   }
 
   Future<void> _selectDate(BuildContext context) async {

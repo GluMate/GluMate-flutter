@@ -138,4 +138,49 @@ print("how");
 
 
   
+ 
+  @override
+  Future<void> doctorRegister({required DoctorRequest body}) async{
+    if (await networkInfo.isConnected!){
+    try{
+      await userRemoteDataSource.doctorRegister(body: body);
+            
+     } on EmailExistsFailure {
+
+      throw EmailExistsFailure();
+    }
+    on ServerFailure {
+
+      throw ServerFailure();
+
+    }  on AppFailure {
+
+      throw AppFailure();
+
+    }
+  } else {
+      throw NetworkFailure();
+
+  }
+  }
+  
+  @override
+Future<Either<Failure, UserEntity>> updateUser({required String userId, required Map<String, dynamic> updateUserFields}) async {
+  if (await networkInfo.isConnected!) {
+    try {
+      await userRemoteDataSource.updateUser(userId: userId, updateUserFields: updateUserFields);
+    } on EmailExistsFailure {
+      throw EmailExistsFailure();
+    } on ServerFailure {
+      throw ServerFailure();
+    } on AppFailure {
+      throw AppFailure();
+    }
+  } else {
+    throw NetworkFailure();
+  }
+  
+  throw AppFailure();
+}
+
 }

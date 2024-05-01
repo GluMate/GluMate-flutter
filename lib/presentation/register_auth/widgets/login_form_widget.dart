@@ -133,46 +133,60 @@ class _LoginFormState extends State<LoginForm> {
                         ],
                       ),
                       SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              signInWithGoogle();
-                            },
-                            child: Image.asset(
-                              'assets/google_png.png',
-                              width: 30,
-                              height: 30,
-                            ),
+                      Container(
+                        width: 270,
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(161, 144, 144, 145),
+                            width: 1.0,
                           ),
-                          SizedBox(width: 50),
-                          IconButton(
-                            icon: Icon(
-                              Icons.facebook,
-                              size: 35,
-                              color: Colors.blue,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row( 
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                signInWithGoogle();
+                              },
+                              child: Image.asset(
+                                'assets/Google.png',
+                                width: 25,
+                                height: 30,
+                              ),
                             ),
-                            onPressed: () {},
-                          ),
-                        ],
+                            SizedBox(width: 15),
+                            Text(
+                              AppLocalization.of(context).translate('google')!,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 76, 139, 175),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                          ],
+                        ),
                       ),
                       SizedBox(height: 5),
                       TextButton(
                         onPressed: () {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                        builder: (context) => ForgotPasswordPage(),
-                        ),);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgotPasswordPage(),
+                            ),
+                          );
                         },
-                         child: Text(
-                            AppLocalization.of(context)
-                                .translate('forgot_password')!,
-                            style: GoogleFonts.roboto(
-                                fontSize: 12,
-                                color: Color.fromARGB(255, 76, 139, 175),
-                            ),),
+                        child: Text(
+                          AppLocalization.of(context)
+                              .translate('forgot_password')!,
+                          style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 76, 139, 175),
+                          ),
+                        ),
                       ),
                     ],
                   ),

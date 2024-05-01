@@ -44,8 +44,19 @@
     "join_doctors": "Rejoignez nos docteurs !",
     "welcome_back": "Bienvenue de retour !",
     "language" : "langue" ,
+    "contact": "Contactez nous",
+    "unknown":"Inconnu",
+    "compte": "Compte",
+    "other": "Autre", 
+    "privacy_importance":"Votre vie privée est importante pour nous,",
+    "info": "Pour plus d'informations, contactez-nous à",
+    "collect": "Nous recueillons des données utilisateur minimales nécessaires au fonctionnement de notre application. Cela peut inclure des données analytiques de base telles que la résolution de l'écran et les statistiques d'utilisation. Nous ne recueillons aucune information personnellement identifiable à moins que l'utilisateur ne la fournisse explicitement pour des fonctionnalités spécifiques.",
+    "agree": "En utilisant notre application, vous acceptez notre Politique de confidentialité.",
+    "privacy":"Politique de confidentialité",
+    "edit": "Modifier",
     "account": "Votre compte a été créé avec succès ",
     "success" : "Succès",
+    "close": "Fermer",
     "sign_out" : "Se déconnecter",
     "or": "ou",
     "new_record" : "Mesure",
@@ -54,12 +65,31 @@
     "forgot_password": "Mot de passe oublié ?",
     "reset": "Réinitialiser votre mot de passe",
     "envoyer": "Envoyer",
-    "please_enter_email": "Veuillez entrer votre adresse e-mail, un code de vérification vous sera envoyé !", 
+    "please_enter_email": "Veuillez entrer votre adresse e-mail, un lien de réinitialisation de mot de passe vous sera envoyé !", 
     "not_verified": "Vous n\"avez pas reçu de code de vérification?", 
-    "resend": "Réenvoyer le code", 
+    "resend": "Réenvoyer le mail", 
     "update_password": "Maintenant, vous pouvez changer votre mot de passe !",
     "verify_code" : "Veuillez entrer le code envoyé par e-mail",
-    "verify": "Verifier"
+    "verify": "Verifier",
+    "update": "Changer votre profil ! ",
+    "confirm": "Confirmer",
+    "google": "Continuer avec Google",
+    "phone":"Numéro de téléphone",
+    "phone_error": "Veuillez entrer votre numéro de téléphone",
+    "done": "Envoyé",
+    "pass_sent": "Email de réinitialisation du mot de passe envoyé!",
+    "pass_desc": "La sécurité de votre compte est notre priorité. Nous vous avons envoyé un lien sécurisé pour changer votre mot de passe en toute sécurité et protéger votre compte.",
+    "please_enter_sugar_blood": "Veuillez saisir la valeur reçue du glucomètre, indiquant le taux de sucre dans votre sang",
+    "sugar": "Votre taux de glycémie",
+    "sugar_empty": "Veuillez entrer votre taux de glycémie!"
+
+
+
+
+
+    
+    
+
 
 
 }
