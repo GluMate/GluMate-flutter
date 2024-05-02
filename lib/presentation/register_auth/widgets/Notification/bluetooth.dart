@@ -28,11 +28,9 @@ class _BluetoothDevicesViewState extends State<BluetoothDevicesView> {
   }
 
   Future<bool> _checkLocationPermission() async {
-    // Check if location permission is granted
     if (await Permission.location.isGranted) {
       return true;
     } else {
-      // Request location permission
       var status = await Permission.location.request();
       return status == PermissionStatus.granted;
     }
@@ -53,10 +51,6 @@ class _BluetoothDevicesViewState extends State<BluetoothDevicesView> {
               .toList();
         });
       }
-      for (var result in _discoveredDevices) {
-        print('Device Name: ${result.device.name}');
-        print('Device ID: ${result.device.id}');
-      }
     });
   }
 
@@ -76,11 +70,14 @@ class _BluetoothDevicesViewState extends State<BluetoothDevicesView> {
         itemCount: _discoveredDevices.length,
         itemBuilder: (context, index) {
           ScanResult device = _discoveredDevices[index];
-          String deviceName = device.device.name ?? 'Unknown Device';
-          return ListTile(
-            title: Text(deviceName),
-            subtitle: Text(device.device.id.toString()),
-          );
+          if (device.device.name != null && device.device.name!.length >= 1) {
+            return ListTile(
+              title: Text(device.device.name!),
+              subtitle: Text(device.device.id.toString()),
+            );
+          } else {
+            return Container();
+          }
         },
       ),
     );
