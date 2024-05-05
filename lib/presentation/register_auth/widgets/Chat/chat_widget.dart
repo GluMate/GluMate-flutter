@@ -131,7 +131,7 @@ class MyChatUIState extends State<MyChatUI> {
                     ),
                   ),
                 ),
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.only(bottom: 12, right: 10),
                   child: Transform.rotate(
                     angle: 45,
@@ -140,7 +140,7 @@ class MyChatUIState extends State<MyChatUI> {
                       color: Color.fromARGB(255, 102, 127, 217),
                     ),
                   ),
-                ),
+                ),*/
                 GestureDetector(
                   onTap: () {
                     setState(() {
