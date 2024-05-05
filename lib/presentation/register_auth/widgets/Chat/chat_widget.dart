@@ -57,7 +57,7 @@ class MyChatUIState extends State<MyChatUI> {
             },
           ),
         ),
-        leadingWidth: 20,
+        leadingWidth: 30,
         title: ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(url),
@@ -71,7 +71,7 @@ class MyChatUIState extends State<MyChatUI> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        actions: const [
+        /*actions: const [
           Padding(
             padding: EdgeInsets.only(right: 20),
             child: Icon(Icons.videocam_rounded),
@@ -80,7 +80,7 @@ class MyChatUIState extends State<MyChatUI> {
             padding: EdgeInsets.only(right: 20),
             child: Icon(Icons.call),
           ),
-        ],
+        ],*/
       ),
       body: Column(
         children: [
