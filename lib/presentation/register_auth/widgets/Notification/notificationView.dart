@@ -13,33 +13,48 @@ class _NotificationViewState extends State<NotificationView> {
   List notificationArr = [
     {
       "image": "assets/notif.png",
-      "title": "Hey, it’s time for lunch",
+      "title": "Adopt a Healthy Diet",
       "time": "About 1 minutes ago"
     },
     {
       "image": "assets/notif.png",
-      "title": "Don’t miss your lowerbody workout",
+      "title": "Monitor Blood Sugar Levels Regularly",
       "time": "About 3 hours ago"
     },
     {
       "image": "assets/notif.png",
-      "title": "Hey, let’s add some meals for your b",
+      "title": "Control Portion Sizes",
       "time": "About 3 hours ago"
     },
     {
       "image": "assets/notif.png",
-      "title": "Congratulations, You have finished A..",
-      "time": "29 May"
+      "title": "Stay Hydrated",
+      "time": "About a day ago"
     },
     {
       "image": "assets/notif.png",
-      "title": "Hey, it’s time for lunch",
-      "time": "8 April"
+      "title": "Exercise Regularly",
+      "time": "About 2 days ago"
     },
     {
       "image": "assets/notif.png",
-      "title": "Ups, You have missed your Lowerbo...",
-      "time": "8 April"
+      "title": "Manage Stress",
+      "time": "About 3 days ago"
+    },
+    {
+      "image": "assets/notif.png",
+      "title": "Get Enough Sleep",
+      "time": "About 3 days ago"
+    },
+    {
+      "image": "assets/notif.png",
+      "title": "Take Medications as Prescribed",
+      "time": "About 3 days ago"
+    },
+    {
+      "image": "assets/notif.png",
+      "title": "Make Sure You Have Regular Medical Check-Ups",
+      "time": "About 3 days ago"
     },
   ];
 
