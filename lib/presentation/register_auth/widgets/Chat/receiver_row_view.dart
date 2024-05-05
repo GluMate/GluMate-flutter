@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
 
-
 class ReceiverRowView extends StatelessWidget {
   const ReceiverRowView({Key? key, required this.index}) : super(key: key);
 

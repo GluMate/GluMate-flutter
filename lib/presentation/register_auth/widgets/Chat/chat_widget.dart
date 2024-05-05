@@ -14,8 +14,7 @@ class MyChatUI extends StatefulWidget {
 
 var url =
     'https://www.dirac.fr/wp-content/uploads/2019/07/medecin-traitant-mutuelle-sante.png';
-var urlTwo =
-    'https://sguru.org/wp-content/uploads/2017/03/cute-n-stylish-boys-fb-dp-2016.jpg';
+var urlTwo = 'https://cdn-icons-png.flaticon.com/512/387/387585.png';
 
 class MyChatUIState extends State<MyChatUI> {
   var controller = TextEditingController();
