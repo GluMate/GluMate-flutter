@@ -1,13 +1,6 @@
-class ChatModel{
+class ChatModel {
+  final String message;
+  final bool isMe;
 
-  final String _messages;
-  final bool _isMe;
-
-
-  ChatModel(this._messages, this._isMe);
-
-  String get message => _messages;
-
-  bool get isMee => _isMe;
-
+  ChatModel(this.message, this.isMe);
 }

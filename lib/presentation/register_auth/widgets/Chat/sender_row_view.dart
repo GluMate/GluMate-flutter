@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chatModel.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
+import 'package:intl/intl.dart'; // Import the intl package for date formatting
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SenderRowView extends StatelessWidget {
-  const SenderRowView({Key? key, required this.index}) : super(key: key);
+  final Map<String, dynamic> data;
 
-  final int index;
+  const SenderRowView({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Extract the timestamp from the data
+    Timestamp timestamp = data['timestamp'];
+    DateTime messageTime = (data['timestamp'] as Timestamp).toDate();
+    String formattedTime = DateFormat.Hm().format(messageTime);
+
     return ListTile(
       leading: Container(
         width: 50,
@@ -22,23 +30,24 @@ class SenderRowView extends StatelessWidget {
               color: Color.fromARGB(255, 189, 200, 240),
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Text(
-            chatModelList.elementAt(index).message,
+            data['text'],
             textAlign: TextAlign.left,
             style: const TextStyle(color: Colors.white),
             softWrap: true,
           ),
         ),
       ]),
-      subtitle: const Padding(
-        padding: EdgeInsets.only(right: 8, top: 4),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(right: 8, top: 4),
         child: Text(
-          '10:03 AM',
+          formattedTime, // Display the formatted time
           textAlign: TextAlign.right,
-          style: TextStyle(fontSize: 10),
+          style: const TextStyle(fontSize: 10),
         ),
       ),
       trailing: CircleAvatar(
-        backgroundImage: NetworkImage(urlTwo),
+        backgroundImage: NetworkImage(
+            'https://cdn-icons-png.flaticon.com/512/387/387585.png'),
       ),
     );
   }

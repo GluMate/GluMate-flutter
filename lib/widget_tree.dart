@@ -8,27 +8,24 @@ import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dar
 import 'package:glumate_flutter/presentation/register_auth/widgets/main_tab.dart';
 
 class WidgetTree extends StatefulWidget {
-const WidgetTree({Key? key}) : super(key: key);
+  const WidgetTree({Key? key}) : super(key: key);
 
-@override
-State<WidgetTree> createState() => _WidgetTreeState();
+  @override
+  State<WidgetTree> createState() => _WidgetTreeState();
 }
 
 class _WidgetTreeState extends State<WidgetTree> {
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: Auth().authStateChanges, 
-      builder: (context , snapshot) {
+      stream: Auth().authStateChanges,
+      builder: (context, snapshot) {
         if (snapshot.hasData) {
           return MainTabView();
         } else {
           return const SplashScreen();
         }
       },
-      );
+    );
   }
-
-
 }
