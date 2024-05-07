@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chatModel.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
+import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ReceiverRowView extends StatelessWidget {
-  const ReceiverRowView({Key? key, required this.index}) : super(key: key);
+  final Map<String, dynamic> data;
 
-  final int index;
+  const ReceiverRowView({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Convert timestamp to DateTime
+    DateTime messageTime = (data['timestamp'] as Timestamp).toDate();
+    // Format the DateTime to display only the time
+    String timeString = DateFormat.Hm().format(messageTime);
+
     return ListTile(
       leading: Padding(
         padding: const EdgeInsets.only(bottom: 10),
         child: CircleAvatar(
-          backgroundImage: NetworkImage(url),
+          backgroundImage: NetworkImage(
+              'https://www.dirac.fr/wp-content/uploads/2019/07/medecin-traitant-mutuelle-sante.png'),
         ),
       ),
       title: Wrap(children: [
@@ -24,7 +33,7 @@ class ReceiverRowView extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Text(
-            chatModelList.elementAt(index).message,
+            data['text'],
             style: const TextStyle(
               color: Colors.black,
             ),
@@ -34,9 +43,12 @@ class ReceiverRowView extends StatelessWidget {
       trailing: Container(
         width: 50,
       ),
-      subtitle: const Padding(
-        padding: EdgeInsets.only(left: 8, top: 4),
-        child: Text('8:04 AM', style: TextStyle(fontSize: 10)),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(left: 8, top: 4),
+        child: Text(
+          timeString,
+          style: TextStyle(fontSize: 10),
+        ),
       ),
     );
   }
