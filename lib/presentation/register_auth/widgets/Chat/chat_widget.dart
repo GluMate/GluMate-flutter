@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chatModel.dart';
-import 'package:glumate_flutter/presentation/register_auth/widgets/Design/colors.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/home_view.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/receiver_row_view.dart';
@@ -12,26 +11,21 @@ class MyChatUI extends StatefulWidget {
   @override
   MyChatUIState createState() => MyChatUIState();
 }
-    int _currentPageIndex = 0;
 
 var url =
-    'https://i.pinimg.com/736x/fd/6e/04/fd6e04548095d7f767917f344a904ff1.jpg';
-var urlTwo =
-    'https://sguru.org/wp-content/uploads/2017/03/cute-n-stylish-boys-fb-dp-2016.jpg';
+    'https://www.dirac.fr/wp-content/uploads/2019/07/medecin-traitant-mutuelle-sante.png';
+var urlTwo = 'https://cdn-icons-png.flaticon.com/512/387/387585.png';
 
 class MyChatUIState extends State<MyChatUI> {
   var controller = TextEditingController();
   var scrollController = ScrollController();
   var message = '';
-  void nextPage() {
-    setState(() {
-      _currentPageIndex++;
-    });
-  }
+
   void animateList() {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
     Future.delayed(const Duration(milliseconds: 100), () {
-      if (scrollController.offset != scrollController.position.maxScrollExtent) {
+      if (scrollController.offset !=
+          scrollController.position.maxScrollExtent) {
         animateList();
       }
     });
@@ -44,7 +38,7 @@ class MyChatUIState extends State<MyChatUI> {
       appBar: AppBar(
         elevation: 12,
         titleSpacing: 10,
-        backgroundColor: TColor.primaryColor1 , 
+        backgroundColor: const Color.fromARGB(255, 102, 127, 217),
         leading: Padding(
           padding: EdgeInsets.all(8.0),
           child: IconButton(
@@ -53,32 +47,39 @@ class MyChatUIState extends State<MyChatUI> {
               color: Colors.white,
             ),
             onPressed: () {
-                Navigator.push(
-                 context,
-                 MaterialPageRoute(
-                 builder: (context) => const HomeView(),
-                 ),
-                 );      
-                                },
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomeView(),
+                ),
+              );
+            },
           ),
         ),
-        leadingWidth: 20,
+        leadingWidth: 30,
         title: ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(url),
           ),
           title: const Text(
-            'Hanine Bouguerra',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
+            'Care Provider',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           subtitle: const Text(
             'online',
             style: TextStyle(color: Colors.white),
           ),
         ),
-       
-        
+        /*actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: Icon(Icons.videocam_rounded),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: Icon(Icons.call),
+          ),
+        ],*/
       ),
       body: Column(
         children: [
@@ -89,13 +90,14 @@ class MyChatUIState extends State<MyChatUI> {
               controller: scrollController,
               physics: const BouncingScrollPhysics(),
               itemCount: chatModelList.length,
-              itemBuilder: (context, index) => chatModelList.elementAt(index).isMee
-                  ? SenderRowView(
-                index: index,
-              )
-                  : ReceiverRowView(
-                index: index,
-              ),
+              itemBuilder: (context, index) =>
+                  chatModelList.elementAt(index).isMee
+                      ? SenderRowView(
+                          index: index,
+                        )
+                      : ReceiverRowView(
+                          index: index,
+                        ),
             ),
           ),
           Container(
@@ -106,8 +108,10 @@ class MyChatUIState extends State<MyChatUI> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(bottom: 12.0, left: 8),
-                  child: Icon(Icons.emoji_emotions_outlined,
-                    color: Color.fromARGB(255, 102, 127, 217),),
+                  child: Icon(
+                    Icons.emoji_emotions_outlined,
+                    color: Color.fromARGB(255, 102, 127, 217),
+                  ),
                 ),
                 Expanded(
                   child: TextFormField(
@@ -126,7 +130,7 @@ class MyChatUIState extends State<MyChatUI> {
                     ),
                   ),
                 ),
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.only(bottom: 12, right: 10),
                   child: Transform.rotate(
                     angle: 45,
@@ -135,7 +139,7 @@ class MyChatUIState extends State<MyChatUI> {
                       color: Color.fromARGB(255, 102, 127, 217),
                     ),
                   ),
-                ),
+                ),*/
                 GestureDetector(
                   onTap: () {
                     setState(() {

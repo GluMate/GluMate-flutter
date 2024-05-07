@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/chat_widget.dart';
 import 'package:glumate_flutter/presentation/register_auth/widgets/Chat/members.dart';
 
-
-
 class SenderRowView extends StatelessWidget {
   const SenderRowView({Key? key, required this.index}) : super(key: key);
 
@@ -21,7 +19,7 @@ class SenderRowView extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
-              color:  Color.fromARGB(255, 189, 200, 240),
+              color: Color.fromARGB(255, 189, 200, 240),
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Text(
             chatModelList.elementAt(index).message,
